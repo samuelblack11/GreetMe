@@ -31,7 +31,7 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
         self.writeNoteField.delegate = self
         writeNoteField.text = "Write your message here :)"
         writeNoteField.textColor = UIColor.lightGray
-        writeNoteField.font = writeNoteField.font?.withSize(18)
+        writeNoteField.font = writeNoteField.font?.withSize(14)
     }
 
     

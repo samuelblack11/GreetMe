@@ -48,10 +48,14 @@ class FinalizeCardViewController: UIViewController {
             let keysToFetch = [CNContactPhoneNumbersKey] as [CNKeyDescriptor]
             let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
             print("Fetched contacts: \(contacts)")
-            if contacts[0].isKeyAvailable(CNContactPhoneNumbersKey) {
+            if contacts.count == 0 {
+                // do nothing
+            }
+            else if contacts[0].isKeyAvailable(CNContactPhoneNumbersKey) {
                 phoneNumber = contacts[0].phoneNumbers[0].value.stringValue
                 print(phoneNumber)
             }
+
         } catch {
             // Handle the error
             print("Can't find Phone Number for Contact Name Entered")
@@ -71,6 +75,8 @@ class FinalizeCardViewController: UIViewController {
         card.recipient = name!
         card.occassion = occassion!
         card.date = Date.now
+
+        
         self.saveContext()
             
         debugPrint("Context Saved")
