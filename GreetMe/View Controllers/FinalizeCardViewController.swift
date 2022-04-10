@@ -72,6 +72,16 @@ class FinalizeCardViewController: UIViewController {
         }
         // Save various attributes to Core Data
         card.card = (cardImage.pngData())!
+        
+        // https://www.hackingwithswift.com/example-code/system/how-to-save-and-load-objects-with-nskeyedarchiver-and-nskeyedunarchiver
+        do {
+            card.card = try NSKeyedArchiver.archivedData(withRootObject: cardStack!, requiringSecureCoding: false)
+        }
+        catch {
+            card.card = (cardImage.pngData())!
+            print("Couldn't save cardStack")
+        }
+        
         card.recipient = name!
         card.occassion = occassion!
         card.date = Date.now

@@ -13,6 +13,8 @@ import SwiftUI
 
 
 class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPickerViewControllerDelegate {
+
+    
  
     @IBOutlet weak var writeNoteField: UITextView!
     @IBOutlet weak var finalizeButton: UIButton!
@@ -24,6 +26,7 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var occasionField: UITextField!
+        
     
 
     override func viewDidLoad() {

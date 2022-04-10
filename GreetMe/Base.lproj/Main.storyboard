@@ -537,17 +537,8 @@
                                     <action selector="writeNoteToFinalize:" destination="vco-ZT-wgu" eventType="touchUpInside" id="R31-QD-Xxp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xg2-SW-4eh" userLabel="chooseFont">
-                                <rect key="frame" x="126.5" y="608" width="161.5" height="31"/>
-                                <accessibility key="accessibilityConfiguration" identifier="chooseFont" label="chooseFont"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Choose Another Font"/>
-                                <connections>
-                                    <action selector="chooseFont:" destination="vco-ZT-wgu" eventType="touchUpInside" id="Mvq-1o-k7x"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SVX-ys-Tp3" userLabel="nameField">
-                                <rect key="frame" x="198" y="659" width="196" height="35"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SVX-ys-Tp3" userLabel="nameField">
+                                <rect key="frame" x="210" y="659" width="184" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Y49-jQ-xHq"/>
                                 </constraints>
@@ -583,6 +574,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xg2-SW-4eh" userLabel="chooseFont">
+                                <rect key="frame" x="126.5" y="608" width="161.5" height="31"/>
+                                <accessibility key="accessibilityConfiguration" identifier="chooseFont" label="chooseFont"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Choose Another Font"/>
+                                <connections>
+                                    <action selector="chooseFont:" destination="vco-ZT-wgu" eventType="touchUpInside" id="Mvq-1o-k7x"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wje-3t-oBN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -592,7 +592,6 @@
                             <constraint firstItem="DcG-f0-2yr" firstAttribute="leading" secondItem="wje-3t-oBN" secondAttribute="leading" constant="20" id="68B-vZ-CeD"/>
                             <constraint firstItem="cha-JN-YfM" firstAttribute="leading" secondItem="wje-3t-oBN" secondAttribute="leading" constant="20" id="Eap-5S-8rv"/>
                             <constraint firstItem="MQg-yT-lC6" firstAttribute="leading" secondItem="wje-3t-oBN" secondAttribute="leading" constant="20" id="H3r-co-pxm"/>
-                            <constraint firstItem="xg2-SW-4eh" firstAttribute="centerX" secondItem="Y3L-Lb-Sdb" secondAttribute="centerX" id="K4m-It-7v0"/>
                             <constraint firstItem="wje-3t-oBN" firstAttribute="trailing" secondItem="DIL-e5-ir5" secondAttribute="trailing" constant="20" id="SdO-IN-USB"/>
                             <constraint firstItem="wje-3t-oBN" firstAttribute="bottom" secondItem="x7W-ih-i0h" secondAttribute="bottom" constant="20" id="eA8-Lf-7ht"/>
                             <constraint firstItem="DcG-f0-2yr" firstAttribute="top" secondItem="cha-JN-YfM" secondAttribute="bottom" constant="55" id="eqX-m6-Rwa"/>
@@ -603,6 +602,7 @@
                             <constraint firstItem="x7W-ih-i0h" firstAttribute="centerX" secondItem="Y3L-Lb-Sdb" secondAttribute="centerX" id="mrN-Nu-maZ"/>
                             <constraint firstItem="DIL-e5-ir5" firstAttribute="top" secondItem="SVX-ys-Tp3" secondAttribute="bottom" constant="22" id="pRi-ti-Ybm"/>
                             <constraint firstItem="wje-3t-oBN" firstAttribute="bottom" secondItem="DcG-f0-2yr" secondAttribute="bottom" constant="25" id="paV-hi-bKX"/>
+                            <constraint firstItem="xg2-SW-4eh" firstAttribute="centerX" secondItem="Y3L-Lb-Sdb" secondAttribute="centerX" id="shC-BV-xiJ"/>
                             <constraint firstItem="x7W-ih-i0h" firstAttribute="top" secondItem="DIL-e5-ir5" secondAttribute="bottom" constant="40" id="sth-7n-RQQ"/>
                             <constraint firstItem="SVX-ys-Tp3" firstAttribute="leading" secondItem="kq5-eO-e1a" secondAttribute="trailing" constant="20" id="uZe-JO-vSw"/>
                             <constraint firstItem="cha-JN-YfM" firstAttribute="top" secondItem="kq5-eO-e1a" secondAttribute="bottom" constant="40" id="y6S-Yj-7hG"/>
@@ -629,11 +629,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Vm-9G-8xh" userLabel="cardStack">
+                            <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Vm-9G-8xh" userLabel="cardStack">
                                 <rect key="frame" x="50" y="69" width="314" height="683"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RuG-NL-wf6">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="275"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="275" id="1vd-zZ-gBO"/>
+                                        </constraints>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aBW-se-ABt" userLabel="noteView">
                                         <rect key="frame" x="0.0" y="295" width="314" height="388"/>
@@ -644,6 +647,16 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="aBW-se-ABt" firstAttribute="centerX" secondItem="0Vm-9G-8xh" secondAttribute="centerX" id="1QF-Qc-AeW"/>
+                                    <constraint firstAttribute="bottom" secondItem="aBW-se-ABt" secondAttribute="bottom" id="4SJ-yF-Osi"/>
+                                    <constraint firstAttribute="trailing" secondItem="RuG-NL-wf6" secondAttribute="trailing" id="KEd-Bz-FNp"/>
+                                    <constraint firstAttribute="trailing" secondItem="aBW-se-ABt" secondAttribute="trailing" id="LGz-1B-pl2"/>
+                                    <constraint firstItem="RuG-NL-wf6" firstAttribute="leading" secondItem="0Vm-9G-8xh" secondAttribute="leading" id="aqa-w6-ABx"/>
+                                    <constraint firstItem="aBW-se-ABt" firstAttribute="leading" secondItem="0Vm-9G-8xh" secondAttribute="leading" id="gjj-Y3-xeC"/>
+                                    <constraint firstItem="RuG-NL-wf6" firstAttribute="top" secondItem="0Vm-9G-8xh" secondAttribute="top" id="nbt-4O-32t"/>
+                                    <constraint firstItem="aBW-se-ABt" firstAttribute="top" secondItem="RuG-NL-wf6" secondAttribute="bottom" constant="20" id="smr-aR-O3Y"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdP-Hv-WEC" userLabel="sendCard">
                                 <rect key="frame" x="157" y="781" width="100" height="40"/>

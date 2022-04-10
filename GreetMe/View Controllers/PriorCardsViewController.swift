@@ -83,7 +83,11 @@ class PriorCardsViewController: UICollectionViewController {
         cell.layer.borderWidth = 0.5
 
         let card = cards[(indexPath as NSIndexPath).row]
-        cell.cardImage!.image = UIImage(data: card.card)
+        // cell.cardImage!.image = UIImage(data: card.card)
+        // cell.cardImage
+        
+        
+        
         
         // https://cocoacasts.com/swift-fundamentals-how-to-convert-a-date-to-a-string-in-swift
         let dateFormatter = DateFormatter()
