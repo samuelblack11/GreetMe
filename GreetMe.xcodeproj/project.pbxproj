@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		260303DC2801DCB9006ACEEB /* Card+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260303DA2801DCB9006ACEEB /* Card+CoreDataClass.swift */; };
 		260303DD2801DCB9006ACEEB /* Card+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260303DB2801DCB9006ACEEB /* Card+CoreDataProperties.swift */; };
+		260303DF2801F75F006ACEEB /* PriorCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260303DE2801F75E006ACEEB /* PriorCardCell.swift */; };
 		2651CAE927FA035C00AB18A9 /* Greeting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2651CAE727FA035C00AB18A9 /* Greeting.xcdatamodeld */; };
 		2651CAEC27FA05EB00AB18A9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651CAEB27FA05EB00AB18A9 /* DataController.swift */; };
 		268A550527F66CEE00E10139 /* PriorCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268A550427F66CEE00E10139 /* PriorCardsViewController.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		260303DA2801DCB9006ACEEB /* Card+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Card+CoreDataClass.swift"; path = "GreetMe/Card+CoreDataClass.swift"; sourceTree = "<group>"; };
 		260303DB2801DCB9006ACEEB /* Card+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Card+CoreDataProperties.swift"; path = "GreetMe/Card+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		260303DE2801F75E006ACEEB /* PriorCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorCardCell.swift; sourceTree = "<group>"; };
 		2651CAE827FA035C00AB18A9 /* Greeting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Greeting.xcdatamodel; sourceTree = "<group>"; };
 		2651CAEB27FA05EB00AB18A9 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		268A550427F66CEE00E10139 /* PriorCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorCardsViewController.swift; sourceTree = "<group>"; };
@@ -112,7 +114,7 @@
 				26D1423A27F5164D00DBAD02 /* MenuViewController.swift */,
 				26CA775127F8E46600D91849 /* New Card View Controller */,
 				268A550427F66CEE00E10139 /* PriorCardsViewController.swift */,
-				26CA772227F8D0AF00D91849 /* SettingsViewController.swift */,
+				260303DE2801F75E006ACEEB /* PriorCardCell.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -120,6 +122,7 @@
 		26CA775127F8E46600D91849 /* New Card View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				26CA772227F8D0AF00D91849 /* SettingsViewController.swift */,
 				26CA774B27F8E1C200D91849 /* NewCardMenuViewController.swift */,
 				26CA774D27F8E44600D91849 /* ImportPhotoViewController.swift */,
 				26CA774F27F8E45F00D91849 /* CustomVisualViewController.swift */,
@@ -204,6 +207,7 @@
 				26CA774E27F8E44700D91849 /* ImportPhotoViewController.swift in Sources */,
 				26BD35EC27F4FDD800DE4793 /* LoginViewController.swift in Sources */,
 				26D1423B27F5164D00DBAD02 /* MenuViewController.swift in Sources */,
+				260303DF2801F75F006ACEEB /* PriorCardCell.swift in Sources */,
 				26CA774C27F8E1C200D91849 /* NewCardMenuViewController.swift in Sources */,
 				26CA772327F8D0AF00D91849 /* SettingsViewController.swift in Sources */,
 				260303DD2801DCB9006ACEEB /* Card+CoreDataProperties.swift in Sources */,

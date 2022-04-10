@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Card" representedClassName="Card" syncable="YES">
-        <attribute name="note" attributeType="Binary"/>
+        <attribute name="card" optional="YES" attributeType="Binary"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="occassion" attributeType="String"/>
         <attribute name="recipient" attributeType="String"/>
-        <attribute name="visual" attributeType="Binary"/>
     </entity>
     <elements>
         <element name="Card" positionX="-54" positionY="18" width="128" height="89"/>

@@ -95,6 +95,9 @@
                                     <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="large"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="default"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="clickSettings:" destination="hJV-Qf-jLd" eventType="touchUpInside" id="Pzg-N8-ja0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCi-yo-Vuz" userLabel="addNewCardButton">
                                 <rect key="frame" x="25" y="285.5" width="100" height="100"/>
@@ -114,8 +117,8 @@
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Prior Cards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oE-oH-j0v">
-                                <rect key="frame" x="262" y="410.5" width="127" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Sent Cards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oE-oH-j0v">
+                                <rect key="frame" x="263.5" y="410.5" width="125.5" height="21"/>
                                 <accessibility key="accessibilityConfiguration" identifier="viewPriorCardsLabel" label="viewPriorCardsLabel"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="AccentColor"/>
@@ -174,7 +177,6 @@
                         <outlet property="viewPriorCardsButton" destination="6XI-mN-6cr" id="ynw-bI-plP"/>
                         <outlet property="viewPriorCardsLabel" destination="8oE-oH-j0v" id="KXU-9n-7y6"/>
                         <segue destination="fuS-tL-XLb" kind="show" identifier="menuToPriorCards" id="L6M-1O-EVs"/>
-                        <segue destination="qR4-zM-otK" kind="show" identifier="menuToTable" id="3Po-ok-doU"/>
                         <segue destination="Mka-QT-726" kind="show" identifier="menuToNewCardMenu" id="1oM-Fr-bYi"/>
                     </connections>
                 </viewController>
@@ -314,8 +316,8 @@
                                     <action selector="selectPhoto4:" destination="zMw-sT-llV" eventType="touchUpInside" id="edj-JK-Kxa"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Up to 4 Photos for your Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYD-U2-qIg" userLabel="selectPhotos">
-                                <rect key="frame" x="72" y="94" width="270.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select 4 Photos for your Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYD-U2-qIg" userLabel="selectPhotos">
+                                <rect key="frame" x="95" y="94" width="224.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -447,44 +449,50 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YIe-6S-9HJ">
-                            <size key="itemSize" width="128" height="128"/>
+                            <size key="itemSize" width="203" height="250"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pvK-4Z-Hvu">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="cardCell" reuseIdentifier="cardCell" id="pvK-4Z-Hvu" userLabel="cardCell" customClass="PriorCardCell" customModule="GreetMe" customModuleProvider="target">
+                                <rect key="frame" x="105.5" y="0.0" width="203" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ccv-zy-eCX">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="203" height="250"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uIr-hn-i0G" userLabel="cardImage">
-                                            <rect key="frame" x="8" y="8" width="112" height="95"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="cardImage" translatesAutoresizingMaskIntoConstraints="NO" id="uIr-hn-i0G" userLabel="cardImage">
+                                            <rect key="frame" x="8" y="8" width="200" height="200"/>
                                             <accessibility key="accessibilityConfiguration" identifier="cardImage" label="cardImage">
                                                 <bool key="isElement" value="YES"/>
                                             </accessibility>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="0kr-AT-Ygh"/>
+                                                <constraint firstAttribute="height" constant="200" id="GQD-mf-CLL"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="cardName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D46-1O-F01" userLabel="cardName">
-                                            <rect key="frame" x="8" y="107" width="58" height="15"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" identifier="cardName" label="cardName"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="cardDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPw-dF-YDj" userLabel="cardDate">
-                                            <rect key="frame" x="68" y="107" width="52" height="15"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <accessibility key="accessibilityConfiguration" identifier="cardDate" label="cardDate"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" restorationIdentifier="cardDetail" text="cardDetail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D46-1O-F01" userLabel="cardDetail">
+                                            <rect key="frame" x="8" y="216" width="116" height="15"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="cardDetail" label="cardDetail"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="uIr-hn-i0G" firstAttribute="leading" secondItem="ccv-zy-eCX" secondAttribute="leadingMargin" id="0Tx-7r-Yls"/>
+                                        <constraint firstItem="uIr-hn-i0G" firstAttribute="top" secondItem="ccv-zy-eCX" secondAttribute="topMargin" id="8oW-1e-dmn"/>
+                                        <constraint firstAttribute="bottom" secondItem="D46-1O-F01" secondAttribute="bottom" constant="93" id="Eb4-z3-dMP"/>
+                                        <constraint firstAttribute="trailing" secondItem="D46-1O-F01" secondAttribute="trailing" constant="79" id="inf-s0-7P7"/>
+                                        <constraint firstItem="uIr-hn-i0G" firstAttribute="leading" secondItem="D46-1O-F01" secondAttribute="leading" id="ywN-di-Fd9"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="203" height="250"/>
+                                <connections>
+                                    <outlet property="cardDetail" destination="D46-1O-F01" id="R1o-bA-syb"/>
+                                    <outlet property="cardImage" destination="uIr-hn-i0G" id="q7s-ha-b3j"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -493,29 +501,13 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="CKv-hM-tK5"/>
+                    <connections>
+                        <outlet property="collectionView" destination="k6y-fa-hhC" id="N7I-3g-Sj6"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RgH-Lc-dYD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1796" y="69"/>
-        </scene>
-        <!--SettingsViewController-->
-        <scene sceneID="fDi-5U-fF6">
-            <objects>
-                <tableViewController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qR4-zM-otK" userLabel="SettingsViewController" customClass="SettingsViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="4MT-Qz-gAb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="qR4-zM-otK" id="ESn-w1-h26"/>
-                            <outlet property="delegate" destination="qR4-zM-otK" id="ic2-sO-201"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="QA4-32-uX4"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q1k-za-f2m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1796" y="800"/>
+            <point key="canvasLocation" x="1795.6521739130437" y="68.973214285714278"/>
         </scene>
         <!--WriteNoteViewController-->
         <scene sceneID="OFP-rb-okQ">
@@ -541,7 +533,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Finalize Note"/>
                                 <connections>
-                                    <action selector="finalizeNote:" destination="vco-ZT-wgu" eventType="touchUpInside" id="Vlo-lf-Jgz"/>
                                     <action selector="writeNoteToFinalize:" destination="vco-ZT-wgu" eventType="touchUpInside" id="R31-QD-Xxp"/>
                                 </connections>
                             </button>
@@ -554,14 +545,8 @@
                                     <action selector="chooseFont:" destination="vco-ZT-wgu" eventType="touchUpInside" id="Mvq-1o-k7x"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Recipient Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kq5-eO-e1a" userLabel="nameLabel">
-                                <rect key="frame" x="14" y="666" width="125" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SVX-ys-Tp3" userLabel="nameField">
-                                <rect key="frame" x="165" y="659" width="229" height="35"/>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SVX-ys-Tp3" userLabel="nameField">
+                                <rect key="frame" x="198" y="659" width="196" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Y49-jQ-xHq"/>
                                 </constraints>
@@ -588,6 +573,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Recipient Name (as appears in Contacts):" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kq5-eO-e1a" userLabel="nameLabel">
+                                <rect key="frame" x="14" y="656" width="170" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="CkU-We-4G6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wje-3t-oBN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -634,107 +628,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Phone #:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpo-2t-Zf4" userLabel="phoneLabel">
-                                <rect key="frame" x="20" y="666" width="143" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3nu-sy-Bbm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10j-jp-1pt" userLabel="bottomLeftLabel">
-                                <rect key="frame" x="20" y="801.5" width="41.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdP-Hv-WEC" userLabel="sendCard">
-                                <rect key="frame" x="157" y="782" width="100" height="35"/>
+                                <rect key="frame" x="157" y="777" width="100" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="Ec6-mZ-T1y"/>
+                                    <constraint firstAttribute="height" constant="40" id="3b3-mC-GQG"/>
                                     <constraint firstAttribute="width" constant="100" id="rw9-cT-KkZ"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Send Card"/>
+                                <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
                                 <connections>
                                     <action selector="sendCard:" destination="wNo-65-Jk0" eventType="touchUpInside" id="K3V-cP-6nh"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0Vm-9G-8xh" userLabel="cardStack">
-                                <rect key="frame" x="94.5" y="277" width="225" height="350"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0Vm-9G-8xh" userLabel="cardStack">
+                                <rect key="frame" x="94.5" y="282" width="225" height="470"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RuG-NL-wf6">
-                                        <rect key="frame" x="0.0" y="0.0" width="225" height="175"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="225" height="225"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="175" id="8Sr-H7-Wi0"/>
+                                            <constraint firstAttribute="height" constant="225" id="8LF-cp-yMP"/>
                                             <constraint firstAttribute="width" constant="225" id="ziB-RR-8Lh"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sLX-bn-pqS">
-                                        <rect key="frame" x="0.0" y="175" width="225" height="175"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aBW-se-ABt" userLabel="noteView">
+                                        <rect key="frame" x="0.0" y="245" width="225" height="225"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="225" id="9wj-ak-4mP"/>
-                                            <constraint firstAttribute="height" constant="175" id="mI2-D7-E4c"/>
+                                            <constraint firstAttribute="height" constant="225" id="fVd-bK-2Ed"/>
+                                            <constraint firstAttribute="width" constant="225" id="sec-f4-Awy"/>
                                         </constraints>
-                                    </imageView>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="225" id="aOg-Jj-57l"/>
-                                    <constraint firstAttribute="height" constant="350" id="kUA-oe-lRq"/>
+                                    <constraint firstAttribute="height" constant="470" id="q2r-ER-t6e"/>
                                 </constraints>
                             </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eu7-K2-ljj" userLabel="emailField">
-                                <rect key="frame" x="165" y="702" width="229" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="k8S-AE-ysM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Email: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFL-GA-DyO" userLabel="emailLabel">
-                                <rect key="frame" x="20" y="721" width="125" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3iC-X4-zq3" userLabel="phoneField">
-                                <rect key="frame" x="183" y="652" width="211" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="G9d-hH-5qR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="V0J-Wk-9s8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="V0J-Wk-9s8" firstAttribute="bottom" secondItem="QdP-Hv-WEC" secondAttribute="bottom" constant="25" id="6j2-2a-hbA"/>
-                            <constraint firstItem="eu7-K2-ljj" firstAttribute="top" secondItem="3iC-X4-zq3" secondAttribute="bottom" constant="15" id="7Vb-Qw-G3s"/>
-                            <constraint firstItem="VFL-GA-DyO" firstAttribute="top" secondItem="wpo-2t-Zf4" secondAttribute="bottom" constant="25" id="Cgw-Xz-URE"/>
                             <constraint firstItem="QdP-Hv-WEC" firstAttribute="centerX" secondItem="z2q-lp-dti" secondAttribute="centerX" id="EwC-6N-1Yr"/>
-                            <constraint firstItem="V0J-Wk-9s8" firstAttribute="trailing" secondItem="eu7-K2-ljj" secondAttribute="trailing" constant="20" id="GG3-4T-dIL"/>
-                            <constraint firstItem="3iC-X4-zq3" firstAttribute="leading" secondItem="wpo-2t-Zf4" secondAttribute="trailing" constant="20" id="MC3-r8-eVS"/>
-                            <constraint firstItem="10j-jp-1pt" firstAttribute="top" secondItem="VFL-GA-DyO" secondAttribute="bottom" constant="60" id="Ojv-TP-aXs"/>
+                            <constraint firstItem="QdP-Hv-WEC" firstAttribute="top" secondItem="0Vm-9G-8xh" secondAttribute="bottom" constant="25" id="OIf-bV-UTc"/>
                             <constraint firstItem="0Vm-9G-8xh" firstAttribute="centerX" secondItem="z2q-lp-dti" secondAttribute="centerX" id="V5F-TG-UeW"/>
-                            <constraint firstItem="VFL-GA-DyO" firstAttribute="leading" secondItem="V0J-Wk-9s8" secondAttribute="leading" constant="20" id="W9j-nN-MZO"/>
-                            <constraint firstItem="QdP-Hv-WEC" firstAttribute="top" secondItem="eu7-K2-ljj" secondAttribute="bottom" constant="45" id="YLF-Px-hbw"/>
-                            <constraint firstItem="3iC-X4-zq3" firstAttribute="top" secondItem="0Vm-9G-8xh" secondAttribute="bottom" constant="25" id="eb0-hK-iAz"/>
-                            <constraint firstItem="V0J-Wk-9s8" firstAttribute="trailing" secondItem="3iC-X4-zq3" secondAttribute="trailing" constant="20" id="ez3-b1-u9r"/>
-                            <constraint firstItem="eu7-K2-ljj" firstAttribute="leading" secondItem="VFL-GA-DyO" secondAttribute="trailing" constant="20" id="ioj-A8-NBj"/>
-                            <constraint firstItem="10j-jp-1pt" firstAttribute="leading" secondItem="V0J-Wk-9s8" secondAttribute="leading" constant="20" id="kNv-Um-4AF"/>
-                            <constraint firstItem="V0J-Wk-9s8" firstAttribute="bottom" secondItem="10j-jp-1pt" secondAttribute="bottom" constant="20" id="l5h-jb-bmI"/>
-                            <constraint firstItem="wpo-2t-Zf4" firstAttribute="leading" secondItem="V0J-Wk-9s8" secondAttribute="leading" constant="20" id="tWR-ki-wXz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="b7z-en-e9b"/>
                     <connections>
                         <outlet property="cardStack" destination="0Vm-9G-8xh" id="OVJ-S8-txa"/>
                         <outlet property="collageView" destination="RuG-NL-wf6" id="e8n-Y3-6bt"/>
-                        <outlet property="noteView" destination="sLX-bn-pqS" id="Omk-tG-ocD"/>
-                        <outlet property="recipientEmail" destination="eu7-K2-ljj" id="dDb-hp-CZ7"/>
-                        <outlet property="recipientPhone" destination="3iC-X4-zq3" id="HVT-N6-y4w"/>
+                        <outlet property="noteView" destination="aBW-se-ABt" id="GXq-uq-18L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SlA-KL-O9W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -753,6 +701,7 @@
         <image name="greetingcard.fill" catalog="system" width="106" height="128"/>
         <image name="paintpalette.fill" catalog="system" width="128" height="105"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="tray.fill" catalog="system" width="128" height="88"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

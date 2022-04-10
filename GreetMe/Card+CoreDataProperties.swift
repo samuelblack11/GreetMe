@@ -17,10 +17,13 @@ extension Card {
         return NSFetchRequest<Card>(entityName: "Card")
     }
 
-    @NSManaged public var note: Data
+    @NSManaged public var card: Data
+    //@NSManaged public var note: Data
     @NSManaged public var occassion: String
     @NSManaged public var recipient: String
-    @NSManaged public var visual: Data
+    //@NSManaged public var visual: Data
+    @NSManaged public var date: Date
+
 
 }
 

@@ -8,57 +8,85 @@
 import Foundation
 import UIKit
 import CoreData
+import SwiftUI
+import Contacts
 
 class FinalizeCardViewController: UIViewController {
     
+    var noteText: String?
+    var noteFont: UIFont?
     var noteImage: Data?
     var collageImage: Data?
     var name: String!
     var occassion: String?
-    
     @IBOutlet weak var collageView: UIImageView!
-    @IBOutlet weak var noteView: UIImageView!
-    @IBOutlet weak var recipientPhone: UITextField!
-    @IBOutlet weak var recipientEmail: UITextField!
+    @IBOutlet weak var noteView: UITextView!
     @IBOutlet weak var cardStack: UIStackView!
+    var phoneNumber: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collageView.image = UIImage(data: collageImage!)
-        noteView.image = UIImage(data: noteImage!)
+        noteView.text = noteText!
+        noteView.font = noteFont!
         imageFill(imageView: collageView)
-        imageFill(imageView: noteView)
-        
+        print("Completed imageFill")
+        determineRecipient()
         }
         
-    
     func imageFill(imageView: UIImageView!) {
         imageView.contentMode = UIView.ContentMode.scaleAspectFill
     }
 
+    // https://developer.apple.com/documentation/contacts
+    func determineRecipient() {
+        print("Determining Recipient")
+        // Fetch contacts that have the name entered by the user on the WriteNoteViewController
+        let store = CNContactStore()
+        do {
+            let predicate = CNContact.predicateForContacts(matchingName: name)
+            let keysToFetch = [CNContactPhoneNumbersKey] as [CNKeyDescriptor]
+            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
+            print("Fetched contacts: \(contacts)")
+            if contacts[0].isKeyAvailable(CNContactPhoneNumbersKey) {
+                phoneNumber = contacts[0].phoneNumbers[0].value.stringValue
+                print(phoneNumber)
+            }
+        } catch {
+            // Handle the error
+            print("Can't find Phone Number for Contact Name Entered")
+            }
+        }
+    
     @IBAction func sendCard(_ sender: Any) {
-        // Save to Core Data
-
+        // Create Core Data Object
         let card = Card(context: DataController.shared.viewContext)
-
-        card.visual = collageImage!
-        card.note = noteImage!
+        // Create Image of Collage/Note
+        let renderer = UIGraphicsImageRenderer(size: cardStack.bounds.size)
+        let cardImage = renderer.image { ctx in
+            cardStack.drawHierarchy(in: cardStack.bounds, afterScreenUpdates: true)
+        }
+        // Save various attributes to Core Data
+        card.card = (cardImage.pngData())!
         card.recipient = name!
         card.occassion = occassion!
-        
-        
+        card.date = Date.now
         self.saveContext()
             
         debugPrint("Context Saved")
-                
+        
+        // https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
+        let shareController = UIActivityViewController(activityItems: [card.card], applicationActivities: nil)
+        shareController.popoverPresentationController?.sourceView = self.view
+        self.present(shareController, animated: true, completion: nil)
+        
         // https://stackoverflow.com/questions/1134289/cocoa-core-data-efficient-way-to-count-entities
-        // Print Count of Visuals Saved
+        // Print Count of Cards Saved
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         let count = try! DataController.shared.viewContext.count(for: fetchRequest)
         print("\(count) Cards Saved")
                 
     }
-    
     
     func saveContext() {
         if DataController.shared.viewContext.hasChanges {
@@ -69,9 +97,4 @@ class FinalizeCardViewController: UIViewController {
             }
         }
     }
-
-    
-    
-    
-    
 }

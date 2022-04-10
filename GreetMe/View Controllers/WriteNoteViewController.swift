@@ -66,6 +66,9 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         writeNoteField.textColor = UIColor.black
+        if writeNoteField.text == "Write your message here :)" {
+            writeNoteField.text = nil
+        }
     }
     
 
@@ -92,22 +95,45 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     // https://www.hackingwithswift.com/example-code/system/how-to-pass-data-between-two-view-controllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "writeNoteToFinalize" {
-            // Convert stack view (UIView) to image (UIImage)
-            let renderer = UIGraphicsImageRenderer(size: writeNoteField.bounds.size)
-            let noteImage = renderer.image { ctx in
-                view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-            }
             let controller = segue.destination as! FinalizeCardViewController
-            controller.noteImage = (noteImage.pngData())!
+            //controller.noteImage = (noteImage.pngData())!
+            controller.noteText = writeNoteField.text
+            controller.noteFont = writeNoteField.font
             controller.collageImage = collageImage
             controller.name = nameField.text
             controller.occassion = occasionField.text
-
+        
             }
         }
     
     
+    
+    
+    func sendAlert(title: String, message: String) {
+    // https://stackoverflow.com/questions/24195310/how-to-add-an-action-to-a-uialertview-button-using-swift-ios
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+        let dismissAction = UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default) {
+                UIAlertAction in NSLog("Dismiss Pressed")
+        }
+            
+        alertController.addAction(dismissAction)
+        self.present(alertController,animated: true, completion: nil)
+    }
+    
+    
+    
+    
     @IBAction func writeNoteToFinalize(_ sender: Any) {
+        
+        if nameField.text == "" {
+            sendAlert(title: "Please Enter the Recipient's Name", message: "(this field is required)")
+            
+        }
+        
+        if occasionField.text == ""  &&  nameField.text != "" {
+            sendAlert(title: "Please Enter the Occassion for Sending the Card", message: "(this field is required)")
+            }
         performSegue(withIdentifier: "writeNoteToFinalize", sender: nil)
     }
     

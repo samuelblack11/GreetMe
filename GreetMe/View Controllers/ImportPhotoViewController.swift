@@ -102,8 +102,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         if segue.identifier == "photoToNote" {            
             // https://www.hackingwithswift.com/example-code/media/how-to-render-a-uiview-to-a-uiimage
             // Convert stack view (UIView) to image (UIImage)
-            print("Collage Size:.......")
-            print(collage.bounds.size)
             let renderer = UIGraphicsImageRenderer(size: collage.bounds.size)
             let collageImage = renderer.image { ctx in
                 collage.drawHierarchy(in: collage.bounds, afterScreenUpdates: true)
@@ -120,10 +118,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBAction func finalizePhotoSelection(_ sender: Any) {
         performSegue(withIdentifier: "photoToNote", sender: nil)
     }
-    
-    
-    
-    
     
     func saveContext() {
         if DataController.shared.viewContext.hasChanges {

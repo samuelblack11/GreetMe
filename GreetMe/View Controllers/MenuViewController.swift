@@ -37,6 +37,17 @@ class MenuViewController: UIViewController {
     }
     
 
+    @IBAction func clickSettings(_ sender: Any) {
+    // https://stackoverflow.com/questions/24195310/how-to-add-an-action-to-a-uialertview-button-using-swift-ios
+        let alertController = UIAlertController(title: "This Feature is Not Yet Available", message: "Please try the other buttons", preferredStyle: .alert)
+            
+        let dismissAction = UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default) {
+                UIAlertAction in NSLog("Dismiss Pressed")
+        }
+            
+        alertController.addAction(dismissAction)
+        self.present(alertController,animated: true, completion: nil)
+    }
     
     
     
