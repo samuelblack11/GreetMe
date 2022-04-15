@@ -104,6 +104,9 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
         cell.layer.borderColor = UIColor.systemBlue.cgColor
         cell.layer.borderWidth = 0.5
         let card = cards[(indexPath as NSIndexPath).row]
+        print("CARD ----")
+        print(card)
+        print("CARD ----")
         // https://www.hackingwithswift.com/example-code/system/how-to-save-and-load-objects-with-nskeyedarchiver-and-nskeyedunarchiver
         do {
             if let noteObject = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(card.message) as? UITextView {
@@ -139,6 +142,7 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
+        self.card = self.cards[(indexPath as NSIndexPath).row]
         print("display context menu")
         
             let enlargeGreeting =  UIAction(title: "Enlarge Greeting", image: UIImage(systemName: "plus.magnifyingglass")) { (action) in
@@ -147,7 +151,10 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
        }
         
         let deleteGreeting = UIAction(title: "Delete Greeting", image: UIImage(systemName: "trash")) { (action) in
+        
+            
             do {
+                print("Attempting Delete")
                 try DataController.shared.viewContext.delete(self.card)
                 try DataController.shared.viewContext.save()
                 }
@@ -157,7 +164,7 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
                 // ...
                  print("Couldn't Delete")
              }
-            
+            self.loadCoreData()
             }
             return UIMenu(title: "",children: [enlargeGreeting, deleteGreeting])
 
