@@ -23,9 +23,11 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     var name: String!
     var occassion: String!
     
-    
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var occasionField: UITextField!
+    var appDelegate: AppDelegate {
+     return UIApplication.shared.delegate as! AppDelegate
+    }
         
     
 
@@ -138,6 +140,7 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
             sendAlert(title: "Please Enter the Occassion for Sending the Card", message: "(this field is required)")
             }
         performSegue(withIdentifier: "writeNoteToFinalize", sender: nil)
+        appDelegate.lastSegue = "writeNoteToFinalize"
     }
     
     

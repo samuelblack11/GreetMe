@@ -18,10 +18,11 @@ extension Card {
     }
 
     @NSManaged public var card: Data
-    //@NSManaged public var note: Data
+    @NSManaged public var collage: Data
+    @NSManaged public var message: Data
+
     @NSManaged public var occassion: String
     @NSManaged public var recipient: String
-    //@NSManaged public var visual: Data
     @NSManaged public var date: Date
 
 

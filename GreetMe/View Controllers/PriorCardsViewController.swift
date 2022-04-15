@@ -10,16 +10,38 @@ import UIKit
 import CoreData
 
 
-class PriorCardsViewController: UICollectionViewController {
+class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerDelegate {
 // https://www.hackingwithswift.com/read/38/5/loading-core-data-objects-using-nsfetchrequest-and-nssortdescriptor
     var cards = [Card]()
+    var card: Card!
+    var menu: UIMenu!
+    
+    var chosenCollage: UIImageView!
+    var chosenNoteField: UITextView!
+    
+    var appDelegate: AppDelegate {
+     return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    //MARK: - UILongPressGestureRecognizer Action -
+        func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+            if gestureReconizer.state != UIGestureRecognizer.State.ended {
+                //When lognpress is start or running
+            }
+            else {
+                //When lognpress is finish
+            }
+        }
+    
+    //var longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+
 
     //https://samwize.com/2015/11/30/understanding-uicollection-flow-layout/
     func setLayout() {
         print("setLayout() called")
         super.viewDidLayoutSubviews()
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 175, height: 370)
+        layout.itemSize = CGSize(width: 175, height: 500)
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
         layout.headerReferenceSize = CGSize(width: 0, height: 25)
@@ -77,30 +99,77 @@ class PriorCardsViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
-        
+        //cell.translatesAutoresizingMaskIntoConstraints = false
         // https://www.hackingwithswift.com/example-code/calayer/how-to-add-a-border-outline-color-to-a-uiview
         cell.layer.borderColor = UIColor.systemBlue.cgColor
         cell.layer.borderWidth = 0.5
-
         let card = cards[(indexPath as NSIndexPath).row]
-        // cell.cardImage!.image = UIImage(data: card.card)
-        // cell.cardImage
-        
-        
-        
-        
+        // https://www.hackingwithswift.com/example-code/system/how-to-save-and-load-objects-with-nskeyedarchiver-and-nskeyedunarchiver
+        do {
+            if let noteObject = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(card.message) as? UITextView {
+                cell.messageView.text = noteObject.text
+                cell.messageView.font = noteObject.font
+            }
+        }
+        catch {
+            print("error translating note field to messageView")
+        }
         // https://cocoacasts.com/swift-fundamentals-how-to-convert-a-date-to-a-string-in-swift
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyy"
-        print(card.date)
         let card_date_string = dateFormatter.string(from: card.date)
-        print(card_date_string)
+        cell.collageView.image = UIImage(data: card.collage)
         cell.cardDetail!.text = "\(card.recipient) (\(card.occassion)) (\(card_date_string))"
         cell.cardDetail!.font = .boldSystemFont(ofSize: 14)
+        
         return cell
     }
+    
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //View In Detail
+        // if tap.....
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
+        print("Did Select ItemAt")
+        card = cards[(indexPath as NSIndexPath).row]
+       
     }
+
+    // https://developer.apple.com/documentation/uikit/uicontrol/adding_context_menus_in_your_app
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
+        print("display context menu")
+        
+            let enlargeGreeting =  UIAction(title: "Enlarge Greeting", image: UIImage(systemName: "plus.magnifyingglass")) { (action) in
+            self.appDelegate.lastSegue = "priorToFinalize"
+            self.performSegue(withIdentifier: "priorToFinalize", sender: nil)
+       }
+        
+        let deleteGreeting = UIAction(title: "Delete Greeting", image: UIImage(systemName: "trash")) { (action) in
+            do {
+                try DataController.shared.viewContext.delete(self.card)
+                try DataController.shared.viewContext.save()
+                }
+                // Save Changes
+             catch {
+                // Error Handling
+                // ...
+                 print("Couldn't Delete")
+             }
+            
+            }
+            return UIMenu(title: "",children: [enlargeGreeting, deleteGreeting])
+
+        }
+    }
+    
+    
+    // https://www.hackingwithswift.com/example-code/system/how-to-pass-data-between-two-view-controllers
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "priorToFinalize" {
+            let controller = segue.destination as! FinalizeCardViewController
+            controller.card = card
+            }
+        }
 }

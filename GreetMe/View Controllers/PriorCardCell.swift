@@ -10,7 +10,10 @@ import UIKit
 
 class PriorCardCell: UICollectionViewCell {
     
-    @IBOutlet weak var cardImage: UIImageView!
     @IBOutlet weak var cardDetail: UILabel!
+    @IBOutlet weak var cardView: UIStackView!
+    @IBOutlet weak var collageView: UIImageView!
+    @IBOutlet weak var messageView: UITextView!
+    var menu: UIMenu!
     
 }

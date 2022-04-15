@@ -22,8 +22,26 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var photo2Preview: UIImageView!
     @IBOutlet weak var photo3Preview: UIImageView!
     @IBOutlet weak var photo4Preview: UIImageView!
-    
     @IBOutlet weak var collage: UIStackView!
+    var menu: UIMenu!
+    
+
+    
+    // https://medium.nextlevelswift.com/creating-a-native-popup-menu-over-a-uibutton-or-uinavigationbar-645edf0329c4
+    func createSubMenu() -> UIMenu {
+        let photoLibraryItem =  UIAction(title: "Photo Library", image: UIImage(systemName: "photo.on.rectangle")) { (action) in
+            self.selectPhoto()
+       }
+        
+        let searchAPIForphotoItem = UIAction(title: "Search The Web", image: UIImage(systemName: "magnifyingglass")) { (action) in
+            }
+        
+        let menu = UIMenu(title: "Choose a Photo Selection Method", options: .displayInline, children: [photoLibraryItem, searchAPIForphotoItem])
+        return menu
+    
+    }
+    
+    
     
     func imageFill(imageView: UIImageView!) {
         imageView.contentMode = UIView.ContentMode.scaleAspectFill
@@ -40,25 +58,29 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func selectPhoto1(_ sender: Any) {
         lastButtonPressed = 1
-        selectPhoto()
+        menu = createSubMenu()
+        photo1Button.menu = menu
+        photo1Button.showsMenuAsPrimaryAction = true
     }
     
     @IBAction func selectPhoto2(_ sender: Any) {
         lastButtonPressed = 2
-        selectPhoto()
+        menu = createSubMenu()
+        photo2Button.menu = menu
+        photo2Button.showsMenuAsPrimaryAction = true
     }
     
     @IBAction func selectPhoto3(_ sender: Any) {
         lastButtonPressed = 3
-        selectPhoto()
+        photo3Button.menu = menu
+        photo3Button.showsMenuAsPrimaryAction = true
     }
     
     @IBAction func selectPhoto4(_ sender: Any) {
         lastButtonPressed = 4
-        selectPhoto()
+        photo4Button.menu = menu
+        photo4Button.showsMenuAsPrimaryAction = true
     }
-    
-    
     
     // https://www.hackingwithswift.com/read/1/5/loading-images-with-uiimage
     // Select Photo using UIImagePickerController
@@ -69,6 +91,21 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         selectPhoto.sourceType = .photoLibrary
         present(selectPhoto, animated: true, completion: nil)
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func testPhotoAPI(_ sender: Any) {
+        PhotoAPI.getPhoto(randomSearch: "Baklava")
+    }
+    
+    
+    
+    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage{
@@ -113,8 +150,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             }
         }
     
-    
-    
     @IBAction func finalizePhotoSelection(_ sender: Any) {
         performSegue(withIdentifier: "photoToNote", sender: nil)
     }
@@ -128,8 +163,4 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             }
         }
     }
-
-    
-    
-    
 }
