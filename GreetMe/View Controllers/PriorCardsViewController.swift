@@ -150,12 +150,12 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
             self.performSegue(withIdentifier: "priorToFinalize", sender: nil)
        }
         
-        let deleteGreeting = UIAction(title: "Delete Greeting", image: UIImage(systemName: "trash")) { (action) in
-        
-            
+            // https://stackoverflow.com/questions/64714923/how-to-change-icon-color-in-uiaction-inside-uimenu/64727653
+            let deleteGreeting = UIAction(title: "Delete Greeting", image: UIImage(systemName: "trash")?.withTintColor(.red, renderingMode: .alwaysOriginal)) { (action) in
+
             do {
                 print("Attempting Delete")
-                try DataController.shared.viewContext.delete(self.card)
+                DataController.shared.viewContext.delete(self.card)
                 try DataController.shared.viewContext.save()
                 }
                 // Save Changes

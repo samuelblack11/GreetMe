@@ -12,20 +12,23 @@ import UIKit
 // https://github.com/unsplash/unsplash-photopicker-ios/blob/master/UnsplashPhotoPicker/UnsplashPhotoPicker/Classes/Models/UnsplashPhoto.swift
 
 class PhotoAPI {
+    
+
 
     enum Endpoints {
     
     static let apiKey = "GXA9JqJgKZiIkvWmnKVuzq1wWNPUN7GiVDHOTiq7f3A"
     static let secretKey = "DKnRQDO4TVGHcmhJVAcgq1VoMpFzvuoMVzql9kvkCmI"
     //static let baseURL = "https://api.unsplash.com"
-    static let baseURL = "https://api.unsplash.com/photos/?client_id=\(apiKey)"
-    case searchedWords(userSearch: String)
+    //static let baseURL = "https://api.unsplash.com/photos/?client_id=\(apiKey)"
+    static let baseURL = "https://api.unsplash.com/search/photos?"
+    case searchedWords(page_num: Int, userSearch: String)
     case random(randomSearch: String)
 
     var URLString: String{
         switch self {
-            case .searchedWords(let userSearch ):
-                return Endpoints.baseURL
+            case .searchedWords(let page_num, let userSearch ):
+            return Endpoints.baseURL + "page=\(page_num)&query=\(userSearch)&client_id=\(PhotoAPI.Endpoints.apiKey)"
         case .random(let randomSearch):
                 return Endpoints.baseURL + ""
             }
@@ -44,8 +47,9 @@ class PhotoAPI {
         let pageNumber = Int.random(in: 0...5)
         let apiKey = "GXA9JqJgKZiIkvWmnKVuzq1wWNPUN7GiVDHOTiq7f3A"
         // Define url for the remote image, using the endpoint parameter
-        let user_search = "pancakes"
-        let url = URL(string: "https://api.unsplash.com/search/photos?query=\(user_search)/?client_id=\(apiKey)")!
+        let user_search = "baklava"
+        //let url = URL(string: "https://api.unsplash.com/search/photos?query=\(user_search)/?client_id=\(apiKey)")!
+        let url = Endpoints.searchedWords(page_num: pageNumber, userSearch: user_search).url
         // the request variables includes information the url session needs to perform the HTTP request
         // What do we gain from using URLRequest instead of passing in the url constant above? It allows us to configure the HTTP request the URL session performs. In this case, we want to specify it is a GET request and we want it in json format (rather than XML)
         var request = URLRequest(url: url)
@@ -64,7 +68,7 @@ class PhotoAPI {
                 // Create JSONDecoder instance and invoke decode function, passing in type of value to decode from the supplied JSON object and the JSON object to decode
                 print(response)
                 print("data = data")
-                if let pics = try? JSONDecoder().decode([Pic].self, from: data) {
+                if let pics = try? JSONDecoder().decode([PicResponse].self, from: data) {
                     print(pics)
                 }
                 else {

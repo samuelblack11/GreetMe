@@ -14,7 +14,6 @@
 		2651CAE927FA035C00AB18A9 /* Greeting.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2651CAE727FA035C00AB18A9 /* Greeting.xcdatamodeld */; };
 		2651CAEC27FA05EB00AB18A9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651CAEB27FA05EB00AB18A9 /* DataController.swift */; };
 		268A550527F66CEE00E10139 /* PriorCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268A550427F66CEE00E10139 /* PriorCardsViewController.swift */; };
-		269554B128083F3100996604 /* UnsplashResponse2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269554B028083F3100996604 /* UnsplashResponse2.swift */; };
 		26BD35E827F4FDD800DE4793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD35E727F4FDD800DE4793 /* AppDelegate.swift */; };
 		26BD35EA27F4FDD800DE4793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD35E927F4FDD800DE4793 /* SceneDelegate.swift */; };
 		26BD35EC27F4FDD800DE4793 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD35EB27F4FDD800DE4793 /* LoginViewController.swift */; };
@@ -22,7 +21,6 @@
 		26BD35F427F4FDDB00DE4793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26BD35F327F4FDDB00DE4793 /* Assets.xcassets */; };
 		26BD35F727F4FDDB00DE4793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26BD35F527F4FDDB00DE4793 /* LaunchScreen.storyboard */; };
 		26BDE8D82806EA680005F10E /* UnsplashPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 26BDE8D72806EA680005F10E /* UnsplashPhotoPicker */; };
-		26BDE8DC2807B37D0005F10E /* UnsplashResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BDE8DB2807B37D0005F10E /* UnsplashResponse.swift */; };
 		26CA772327F8D0AF00D91849 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA772227F8D0AF00D91849 /* SettingsViewController.swift */; };
 		26CA774C27F8E1C200D91849 /* NewCardMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA774B27F8E1C200D91849 /* NewCardMenuViewController.swift */; };
 		26CA774E27F8E44700D91849 /* ImportPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA774D27F8E44600D91849 /* ImportPhotoViewController.swift */; };
@@ -30,6 +28,7 @@
 		26CA775327F8E56300D91849 /* WriteNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA775227F8E56300D91849 /* WriteNoteViewController.swift */; };
 		26CA775527F8E5BC00D91849 /* FinalizeCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CA775427F8E5BC00D91849 /* FinalizeCardViewController.swift */; };
 		26D1423B27F5164D00DBAD02 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D1423A27F5164D00DBAD02 /* MenuViewController.swift */; };
+		26D25C672809133C001CAFBC /* UnSplashRepsonse3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D25C662809133C001CAFBC /* UnSplashRepsonse3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +39,6 @@
 		2651CAE827FA035C00AB18A9 /* Greeting.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Greeting.xcdatamodel; sourceTree = "<group>"; };
 		2651CAEB27FA05EB00AB18A9 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		268A550427F66CEE00E10139 /* PriorCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorCardsViewController.swift; sourceTree = "<group>"; };
-		269554B028083F3100996604 /* UnsplashResponse2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashResponse2.swift; sourceTree = "<group>"; };
 		26BD35E427F4FDD800DE4793 /* GreetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26BD35E727F4FDD800DE4793 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26BD35E927F4FDD800DE4793 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +48,6 @@
 		26BD35F627F4FDDB00DE4793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26BD35F827F4FDDB00DE4793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26BD35FE27F4FF3600DE4793 /* GreetMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GreetMe.entitlements; sourceTree = "<group>"; };
-		26BDE8DB2807B37D0005F10E /* UnsplashResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashResponse.swift; sourceTree = "<group>"; };
 		26CA772227F8D0AF00D91849 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		26CA774B27F8E1C200D91849 /* NewCardMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardMenuViewController.swift; sourceTree = "<group>"; };
 		26CA774D27F8E44600D91849 /* ImportPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPhotoViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +55,7 @@
 		26CA775227F8E56300D91849 /* WriteNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewController.swift; sourceTree = "<group>"; };
 		26CA775427F8E5BC00D91849 /* FinalizeCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizeCardViewController.swift; sourceTree = "<group>"; };
 		26D1423A27F5164D00DBAD02 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		26D25C662809133C001CAFBC /* UnSplashRepsonse3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSplashRepsonse3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +106,7 @@
 				26BD35E727F4FDD800DE4793 /* AppDelegate.swift */,
 				26BD35E927F4FDD800DE4793 /* SceneDelegate.swift */,
 				26BD35ED27F4FDD800DE4793 /* Main.storyboard */,
-				26BDE8DB2807B37D0005F10E /* UnsplashResponse.swift */,
-				269554B028083F3100996604 /* UnsplashResponse2.swift */,
+				26D25C662809133C001CAFBC /* UnSplashRepsonse3.swift */,
 				26CA772127F8D07200D91849 /* View Controllers */,
 				26BD35F327F4FDDB00DE4793 /* Assets.xcassets */,
 				26BD35F527F4FDDB00DE4793 /* LaunchScreen.storyboard */,
@@ -230,15 +227,14 @@
 				26CA772327F8D0AF00D91849 /* SettingsViewController.swift in Sources */,
 				260303DD2801DCB9006ACEEB /* Card+CoreDataProperties.swift in Sources */,
 				26CA775327F8E56300D91849 /* WriteNoteViewController.swift in Sources */,
-				26BDE8DC2807B37D0005F10E /* UnsplashResponse.swift in Sources */,
 				260303DC2801DCB9006ACEEB /* Card+CoreDataClass.swift in Sources */,
 				26CA775027F8E45F00D91849 /* CustomVisualViewController.swift in Sources */,
 				268A550527F66CEE00E10139 /* PriorCardsViewController.swift in Sources */,
+				26D25C672809133C001CAFBC /* UnSplashRepsonse3.swift in Sources */,
 				2651CAEC27FA05EB00AB18A9 /* DataController.swift in Sources */,
 				26BD35E827F4FDD800DE4793 /* AppDelegate.swift in Sources */,
 				2651CAE927FA035C00AB18A9 /* Greeting.xcdatamodeld in Sources */,
 				26BD35EA27F4FDD800DE4793 /* SceneDelegate.swift in Sources */,
-				269554B128083F3100996604 /* UnsplashResponse2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
