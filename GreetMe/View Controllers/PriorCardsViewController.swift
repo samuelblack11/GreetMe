@@ -92,6 +92,9 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
         loadCoreData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        loadCoreData()
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         cards.count

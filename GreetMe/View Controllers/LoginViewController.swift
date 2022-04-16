@@ -16,11 +16,6 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var greetingLogo: UIImageView!
     
-    
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true

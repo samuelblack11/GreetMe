@@ -693,6 +693,14 @@
                                     <action selector="sendCard:" destination="wNo-65-Jk0" eventType="touchUpInside" id="K3V-cP-6nh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpP-7J-mhQ">
+                                <rect key="frame" x="25" y="786" width="55.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                <connections>
+                                    <action selector="saveCard:" destination="wNo-65-Jk0" eventType="touchUpInside" id="FAB-Zq-OCR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="V0J-Wk-9s8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -703,7 +711,9 @@
                             <constraint firstItem="0Vm-9G-8xh" firstAttribute="leading" secondItem="V0J-Wk-9s8" secondAttribute="leading" constant="50" id="LmA-MR-CkA"/>
                             <constraint firstItem="0Vm-9G-8xh" firstAttribute="centerX" secondItem="z2q-lp-dti" secondAttribute="centerX" id="V5F-TG-UeW"/>
                             <constraint firstItem="QdP-Hv-WEC" firstAttribute="top" secondItem="0Vm-9G-8xh" secondAttribute="bottom" constant="25" id="nsl-CX-5Nx"/>
+                            <constraint firstItem="TpP-7J-mhQ" firstAttribute="leading" secondItem="V0J-Wk-9s8" secondAttribute="leading" constant="25" id="o6I-2E-GQz"/>
                             <constraint firstItem="V0J-Wk-9s8" firstAttribute="trailing" secondItem="0Vm-9G-8xh" secondAttribute="trailing" constant="50" id="qUc-Ha-jaD"/>
+                            <constraint firstItem="V0J-Wk-9s8" firstAttribute="bottom" secondItem="TpP-7J-mhQ" secondAttribute="bottom" constant="25" id="rUg-cG-mKP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="b7z-en-e9b"/>

@@ -64,11 +64,13 @@ class PhotoAPI {
             { data, response, error in
             // If data response not null
             print(data)
+            print("DATA ------------")
+            print(String(data: data!, encoding: .utf8))
             if let data = data {
                 // Create JSONDecoder instance and invoke decode function, passing in type of value to decode from the supplied JSON object and the JSON object to decode
                 print(response)
                 print("data = data")
-                if let pics = try? JSONDecoder().decode([PicResponse].self, from: data) {
+                if let pics = try? JSONDecoder().decode(PicResponse.self, from: data) {
                     print(pics)
                 }
                 else {

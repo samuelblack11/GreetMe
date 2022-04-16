@@ -70,6 +70,7 @@ class FinalizeCardViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        print("viewDidLoad Called")
         super.viewDidLoad()
         determineCardSource()
         imageFill(imageView: collageView)
@@ -77,6 +78,7 @@ class FinalizeCardViewController: UIViewController {
         }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear Called")
         determineCardSource()
     }
         
@@ -137,6 +139,9 @@ class FinalizeCardViewController: UIViewController {
     
     
     
+    @IBAction func saveCard(_ sender: Any) {
+        saveToCoreData()
+    }
     
     func saveToCoreData() {
         // Create Core Data Object
@@ -163,10 +168,13 @@ class FinalizeCardViewController: UIViewController {
         // Print Count of Cards Saved
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
         let count = try! DataController.shared.viewContext.count(for: fetchRequest)
-        print("\(count) Cards Saved")
-        
-        shareCard(cardInstance: card)
+        print("\(count) Cards Saved")        
     }
+    
+    
+    
+    
+    
     
     @IBAction func sendCard(_ sender: Any) {
         
@@ -175,7 +183,7 @@ class FinalizeCardViewController: UIViewController {
         // to be name of segue from writenote to final
         // if segue from collection view, set value to be that segue name
         if appDelegate.lastSegue == "writeNoteToFinalize" {
-            saveToCoreData()
+            shareCard(cardInstance: card)
             }
         else if appDelegate.lastSegue == "priorToFinalize"  {
         do {
