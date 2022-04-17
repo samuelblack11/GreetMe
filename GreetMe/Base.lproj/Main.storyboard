@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mka-QT-726">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -20,27 +20,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="activityIndicator" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bnQ-ad-S8Q" userLabel="activityIndicator">
-                                <rect key="frame" x="182" y="710" width="50" height="50"/>
+                                <rect key="frame" x="182" y="681" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="FQD-U3-1iw"/>
                                     <constraint firstAttribute="height" constant="50" id="wqT-6P-qPi"/>
                                 </constraints>
                             </activityIndicatorView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greetingcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ai0-3r-n3v">
-                                <rect key="frame" x="157" y="397.5" width="100" height="101"/>
-                                <color key="tintColor" name="AccentColor"/>
+                                <rect key="frame" x="157" y="93.5" width="100" height="76"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="CAY-Ll-7zq"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="h5H-MF-zUK"/>
+                                    <constraint firstAttribute="height" constant="75" id="iO9-1G-ag3"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GreetMe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byg-WC-DFt">
-                                <rect key="frame" x="150.5" y="241" width="113" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhn-ZF-tHX">
-                                <rect key="frame" x="123.5" y="619" width="167" height="31"/>
+                                <rect key="frame" x="123.5" y="781" width="167" height="31"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration" identifier="signInButton" label="signInButton"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -50,18 +45,26 @@
                                     <action selector="loginFunction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HqP-MX-ysK"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GreetMe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byg-WC-DFt">
+                                <rect key="frame" x="150.5" y="44" width="113" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="whO-qd-RKv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="nhn-ZF-tHX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ATY-SN-QkP"/>
-                            <constraint firstItem="bnQ-ad-S8Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DDk-aY-U7h"/>
-                            <constraint firstItem="Ai0-3r-n3v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EK9-nL-iDM"/>
-                            <constraint firstItem="bnQ-ad-S8Q" firstAttribute="top" secondItem="nhn-ZF-tHX" secondAttribute="bottom" constant="60" id="OYT-Gb-qKr"/>
-                            <constraint firstItem="Ai0-3r-n3v" firstAttribute="top" secondItem="Byg-WC-DFt" secondAttribute="bottom" constant="121" id="oKB-bL-HkX"/>
-                            <constraint firstItem="Ai0-3r-n3v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sWu-mK-dH3"/>
-                            <constraint firstItem="nhn-ZF-tHX" firstAttribute="top" secondItem="Ai0-3r-n3v" secondAttribute="bottom" constant="121" id="tk1-cV-P1r"/>
-                            <constraint firstItem="Byg-WC-DFt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yD2-cU-hZj"/>
+                            <constraint firstItem="Byg-WC-DFt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MSJ-uk-yu5"/>
+                            <constraint firstItem="nhn-ZF-tHX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OT8-j0-d3k"/>
+                            <constraint firstItem="Ai0-3r-n3v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rxv-dC-dUI"/>
+                            <constraint firstItem="bnQ-ad-S8Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="W41-Yy-rfh"/>
+                            <constraint firstItem="Ai0-3r-n3v" firstAttribute="top" secondItem="Byg-WC-DFt" secondAttribute="bottom" id="Y8k-0b-Vb5"/>
+                            <constraint firstItem="Byg-WC-DFt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YUn-PJ-Ho8"/>
+                            <constraint firstItem="nhn-ZF-tHX" firstAttribute="top" secondItem="bnQ-ad-S8Q" secondAttribute="bottom" constant="50" id="eIC-dS-jD3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nhn-ZF-tHX" secondAttribute="bottom" constant="50" id="qh0-G2-PfQ"/>
                         </constraints>
                     </view>
                     <connections>

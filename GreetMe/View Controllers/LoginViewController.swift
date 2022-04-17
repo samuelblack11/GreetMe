@@ -22,6 +22,12 @@ class LoginViewController: UIViewController {
         print("viewDidLoad")
         // Do any additional setup after loading the view.
         setUpSignInAppleButton()
+        // https://stackoverflow.com/questions/27049937/how-to-set-a-background-image-in-xcode-using-swift
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "hamid-roshaan-BQrzI0vi9x0-unsplash.jpg")
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
         
     }
     
