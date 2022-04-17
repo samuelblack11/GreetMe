@@ -31,4 +31,17 @@ class NewCardMenuViewController: UIViewController {
         
     }
     
+    
+    @IBAction func createCollageSegue(_ sender: Any) {
+        //performSegue(withIdentifier: "menuToPhoto", sender: nil)
+        //self.view.window?.rootViewController?.presentedViewController!.dismiss(animated: true, completion: nil)
+        //self.view.window?.rootViewController?.presentedViewController!.dismiss(animated: true, completion: nil)
+        //self.view.window?.
+
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "ImportPhotoViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+        
+    }
+    
+    
 }

@@ -16,8 +16,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var photo3Button: UIButton!
     @IBOutlet weak var photo4Button: UIButton!
     var lastButtonPressed: Int = 0
-    @IBOutlet weak var finalizeButton: UIButton!
-    
     @IBOutlet weak var photo1Preview: UIImageView!
     @IBOutlet weak var photo2Preview: UIImageView!
     @IBOutlet weak var photo3Preview: UIImageView!
@@ -26,6 +24,31 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     var menu: UIMenu!
     
 
+    @IBOutlet weak var navTitle: UINavigationItem!
+        
+    var barItems = [UIBarButtonItem]()
+
+    
+    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
+    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
+
+    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
+    
+    @objc func clickBackButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+
+    
+    @objc func clickMenuButton() {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func finalizePhotos() {
+        self.performSegue(withIdentifier: "photoToNote", sender: nil)
+    }
+    
     
     // https://medium.nextlevelswift.com/creating-a-native-popup-menu-over-a-uibutton-or-uinavigationbar-645edf0329c4
     func createSubMenu() -> UIMenu {
@@ -53,7 +76,11 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         imageFill(imageView: photo2Preview)
         imageFill(imageView: photo3Preview)
         imageFill(imageView: photo4Preview)
-        
+
+        navTitle.leftBarButtonItems = [backButton, menuButton]
+        navTitle.rightBarButtonItems = [menuButton]
+
+
     }
     
     @IBAction func selectPhoto1(_ sender: Any) {
@@ -149,10 +176,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         
             }
         }
-    
-    @IBAction func finalizePhotoSelection(_ sender: Any) {
-        performSegue(withIdentifier: "photoToNote", sender: nil)
-    }
     
     func saveContext() {
         if DataController.shared.viewContext.hasChanges {

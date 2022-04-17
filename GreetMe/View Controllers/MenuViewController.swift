@@ -57,4 +57,25 @@ class MenuViewController: UIViewController {
         sizeButtonImages()
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("MenuViewController viewWillDisapper Called")
+    }
+    
+    
+    @IBAction func createNewCardSegue(_ sender: Any) {
+        //performSegue(withIdentifier: "menuToNewCardMenu", sender: nil)
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "NewCardMenuViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+    }
+
+    @IBAction func viewPriorCardsSegue(_ sender: Any) {
+       // performSegue(withIdentifier: "menuToPriorCards", sender: nil)
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "PriorCardsViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    
+    
+    
 }

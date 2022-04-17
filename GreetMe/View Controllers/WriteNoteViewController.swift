@@ -28,6 +28,43 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     var appDelegate: AppDelegate {
      return UIApplication.shared.delegate as! AppDelegate
     }
+    
+    @IBOutlet weak var navItem: UINavigationItem!
+    
+    
+    
+    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
+    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
+    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
+        
+
+    
+    @objc func clickBackButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @objc func clickMenuButton() {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func writeNoteToFinalize() {
+        
+        if nameField.text == "" {
+            sendAlert(title: "Please Enter the Recipient's Name", message: "(this field is required)")
+            
+        }
+        
+        if occasionField.text == ""  &&  nameField.text != "" {
+            sendAlert(title: "Please Enter the Occassion for Sending the Card", message: "(this field is required)")
+            }
+        performSegue(withIdentifier: "writeNoteToFinalize", sender: nil)
+        appDelegate.lastSegue = "writeNoteToFinalize"
+    }
+    
+    
         
     
 
@@ -37,6 +74,10 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
         writeNoteField.text = "Write your message here :)"
         writeNoteField.textColor = UIColor.lightGray
         writeNoteField.font = writeNoteField.font?.withSize(14)
+
+        navItem.leftBarButtonItems = [backButton]
+        navItem.rightBarButtonItems = [menuButton]
+
     }
 
     
@@ -113,6 +154,9 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     
     
     
+
+    
+    
     
     func sendAlert(title: String, message: String) {
     // https://stackoverflow.com/questions/24195310/how-to-add-an-action-to-a-uialertview-button-using-swift-ios
@@ -125,26 +169,6 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
         alertController.addAction(dismissAction)
         self.present(alertController,animated: true, completion: nil)
     }
-    
-    
-    
-    
-    @IBAction func writeNoteToFinalize(_ sender: Any) {
-        
-        if nameField.text == "" {
-            sendAlert(title: "Please Enter the Recipient's Name", message: "(this field is required)")
-            
-        }
-        
-        if occasionField.text == ""  &&  nameField.text != "" {
-            sendAlert(title: "Please Enter the Occassion for Sending the Card", message: "(this field is required)")
-            }
-        performSegue(withIdentifier: "writeNoteToFinalize", sender: nil)
-        appDelegate.lastSegue = "writeNoteToFinalize"
-    }
-    
-    
-    
     
     func saveContext() {
         if DataController.shared.viewContext.hasChanges {

@@ -40,9 +40,7 @@ struct ResultDetails: Decodable {
     let topic_submissions: String
     let user: [userDetails]
     // Confirmed data types through user (with corresponding notes)
-    let tags: [tags_0_source, tags_1, tags_2]
-    
-    
+    let tags: Data! = nil
 }
 
 // CONFIRMED KEYS

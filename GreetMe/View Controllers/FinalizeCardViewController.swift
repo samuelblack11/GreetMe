@@ -35,6 +35,27 @@ class FinalizeCardViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var navItem: UINavigationItem!
+    
+    
+    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
+    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
+    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
+        
+
+    
+    @objc func clickBackButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @objc func clickMenuButton() {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+        
+    }
+    
+    
     
     func determineCardSource() {
         
@@ -75,6 +96,8 @@ class FinalizeCardViewController: UIViewController {
         determineCardSource()
         imageFill(imageView: collageView)
         //determineRecipient()
+        navItem.leftBarButtonItems = [backButton]
+        navItem.rightBarButtonItems = [menuButton]
         }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,7 +153,6 @@ class FinalizeCardViewController: UIViewController {
     func shareCard(cardInstance: Card) {
         //var ntoeView2 = some View
         cardExport = prepCardForExport()
-        print(cardExport)
         // https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
         let shareController = UIActivityViewController(activityItems: [cardExport!], applicationActivities: nil)
         shareController.popoverPresentationController?.sourceView = self.view
@@ -139,11 +161,12 @@ class FinalizeCardViewController: UIViewController {
     
     
     
-    @IBAction func saveCard(_ sender: Any) {
+    @IBAction func saveAction(_ sender: Any) {
         saveToCoreData()
     }
     
-    func saveToCoreData() {
+    
+    @objc func saveToCoreData() {
         // Create Core Data Object
         let card = Card(context: DataController.shared.viewContext)
         // https://www.hackingwithswift.com/example-code/system/how-to-save-and-load-objects-with-nskeyedarchiver-and-nskeyedunarchiver
@@ -171,12 +194,13 @@ class FinalizeCardViewController: UIViewController {
         print("\(count) Cards Saved")        
     }
     
+    @IBAction func shareAction(_ sender: Any) {
+        sendCard()
+    }
     
     
     
-    
-    
-    @IBAction func sendCard(_ sender: Any) {
+    func sendCard() {
         
         // if last segue was
         // store variable (lastSegue) in appdelegate. default value is ""
