@@ -13,9 +13,24 @@ class NewCardMenuViewController: UIViewController {
     @IBOutlet weak var createCollageButton: UIButton!
     @IBOutlet weak var createCustomVisualButton: UIButton!
     
+    @IBOutlet weak var importImageView: UIImageView!
+    
+    @IBOutlet weak var createCustomVisualView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // searched camera
+        imageFill(imageView: importImageView)
+        // searched paint palette
+        imageFill(imageView: createCustomVisualView)
+        
+        // searched envelopes
+        // searched write
+        
     }
+    
+    func imageFill(imageView: UIImageView!) {
+        imageView.contentMode = UIView.ContentMode.scaleAspectFill    }
     
     
     @IBAction func createCustomVisualOnClick(_ sender: Any) {

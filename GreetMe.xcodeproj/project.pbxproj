@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26015A7B280C89CD00A3A7DC /* UnsplashPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26015A7A280C89CD00A3A7DC /* UnsplashPicker.swift */; };
 		260303DC2801DCB9006ACEEB /* Card+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260303DA2801DCB9006ACEEB /* Card+CoreDataClass.swift */; };
 		260303DD2801DCB9006ACEEB /* Card+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260303DB2801DCB9006ACEEB /* Card+CoreDataProperties.swift */; };
 		260303DF2801F75F006ACEEB /* PriorCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260303DE2801F75E006ACEEB /* PriorCardCell.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26015A7A280C89CD00A3A7DC /* UnsplashPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashPicker.swift; sourceTree = "<group>"; };
 		260303DA2801DCB9006ACEEB /* Card+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Card+CoreDataClass.swift"; path = "GreetMe/Card+CoreDataClass.swift"; sourceTree = "<group>"; };
 		260303DB2801DCB9006ACEEB /* Card+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Card+CoreDataProperties.swift"; path = "GreetMe/Card+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		260303DE2801F75E006ACEEB /* PriorCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorCardCell.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				26BD35E727F4FDD800DE4793 /* AppDelegate.swift */,
 				26BD35E927F4FDD800DE4793 /* SceneDelegate.swift */,
 				26BD35ED27F4FDD800DE4793 /* Main.storyboard */,
+				26015A7A280C89CD00A3A7DC /* UnsplashPicker.swift */,
 				2612AA19280AF2BB00110C43 /* UnsplashResponse.swift */,
 				2612AA1B280AF2E000110C43 /* UnsplashResponseTags.swift */,
 				26CA772127F8D07200D91849 /* View Controllers */,
@@ -227,6 +230,7 @@
 				260303DF2801F75F006ACEEB /* PriorCardCell.swift in Sources */,
 				26CA774C27F8E1C200D91849 /* NewCardMenuViewController.swift in Sources */,
 				263B28B32802FC2F00E9AD43 /* PhotoAPI.swift in Sources */,
+				26015A7B280C89CD00A3A7DC /* UnsplashPicker.swift in Sources */,
 				26CA772327F8D0AF00D91849 /* SettingsViewController.swift in Sources */,
 				260303DD2801DCB9006ACEEB /* Card+CoreDataProperties.swift in Sources */,
 				2612AA1C280AF2E000110C43 /* UnsplashResponseTags.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerDelegate {
+class PriorCardsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 // https://www.hackingwithswift.com/read/38/5/loading-core-data-objects-using-nsfetchrequest-and-nssortdescriptor
     var cards = [Card]()
     var card: Card!
@@ -23,32 +23,52 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
      return UIApplication.shared.delegate as! AppDelegate
     }
     
-    //MARK: - UILongPressGestureRecognizer Action -
-        func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-            if gestureReconizer.state != UIGestureRecognizer.State.ended {
-                //When lognpress is start or running
-            }
-            else {
-                //When lognpress is finish
-            }
-        }
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    //var longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-
+    @IBOutlet weak var navItem: UINavigationItem!
+    
+    @IBOutlet weak var collectionViewLayoutFromStoryboard: UICollectionViewFlowLayout!
+    
+    
+    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
+    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
+    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
+        
+    @objc func clickBackButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func clickMenuButton() {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+        
+    }
 
     //https://samwize.com/2015/11/30/understanding-uicollection-flow-layout/
     func setLayout() {
         print("setLayout() called")
         super.viewDidLayoutSubviews()
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 175, height: 500)
-        layout.minimumLineSpacing = 8
-        layout.minimumInteritemSpacing = 8
-        layout.headerReferenceSize = CGSize(width: 0, height: 25)
-        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        collectionView.collectionViewLayout = layout
+        layout.itemSize = CGSize(width: 150, height: 375)
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
+        layout.headerReferenceSize = CGSize(width: 0, height: 10)
+        layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        
+        //collectionView.collectionViewLayout = layout
+        //collectionView.backgroundColor = .green
+        //collectionViewLayoutFromStoryboard = layout
     }
     
+    // https://stackoverflow.com/questions/38025112/how-do-i-set-collection-views-cell-size-via-the-auto-layout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //let cellsAcross: CGFloat = 2
+        //let spaceBetweenCells: CGFloat = 1
+        //let dim = (collectionView.bounds.width - (cellsAcross - 1) * spaceBetweenCells) / cellsAcross
+        return CGSize(width: 150, height: 375)
+        
+    }
+
     
     
     func loadCoreData() {
@@ -87,20 +107,25 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
     override func viewDidLoad() {
         super.viewDidLoad()
         print("View Did Load")
-        setLayout()
-        //deleteCoreData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
         loadCoreData()
+        //setLayout()
+        //deleteCoreData()
+        navItem.leftBarButtonItems = [backButton]
+        navItem.rightBarButtonItems = [menuButton]
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         loadCoreData()
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         cards.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
         //cell.translatesAutoresizingMaskIntoConstraints = false
         // https://www.hackingwithswift.com/example-code/calayer/how-to-add-a-border-outline-color-to-a-uiview
@@ -132,7 +157,7 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
     }
     
 
-   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //View In Detail
         // if tap.....
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
@@ -142,7 +167,7 @@ class PriorCardsViewController: UICollectionViewController, UIGestureRecognizerD
     }
 
     // https://developer.apple.com/documentation/uikit/uicontrol/adding_context_menus_in_your_app
-    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
         self.card = self.cards[(indexPath as NSIndexPath).row]

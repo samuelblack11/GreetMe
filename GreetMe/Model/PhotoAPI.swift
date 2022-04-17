@@ -71,6 +71,7 @@ class PhotoAPI {
                 print(response)
                 print("data = data")
                 if let pics = try? JSONDecoder().decode(PicResponse.self, from: data) {
+                    print("Valid Response")
                     print(pics)
                 }
                 else {

@@ -31,7 +31,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     
     // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
     let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
-
     let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
     
     @objc func clickBackButton() {
@@ -173,6 +172,12 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             
             let controller = segue.destination as! WriteNoteViewController
             controller.collageImage = (collageImage.pngData())!
+            
+        if segue.identifier == "importToUnsplash" {
+            let controller = segue.destination as! UnsplashPicker
+            //controller.unsplashPhotos = pics
+                
+            }
         
             }
         }

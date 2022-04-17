@@ -16,17 +16,15 @@ class MenuViewController: UIViewController {
 
     @IBOutlet weak var addNewCardButton: UIButton!
     @IBOutlet weak var viewPriorCardsButton: UIButton!
-    @IBOutlet weak var settingButton: UIButton!
     var buttonConfig = UIButton.Configuration.filled()
 
     @IBOutlet weak var addNewCardLabel: UILabel!
     @IBOutlet weak var viewPriorCardsLabel: UILabel!
-    @IBOutlet weak var settingLabel: UILabel!
      
     func sizeButtonImages() {
-        let frame = CGRect(x: 10, y: 10, width: self.view.frame.width - 20, height: 300)
-         self.settingButton.imageView?.frame = frame
-        print("ran sizeButtonImages")
+        //let frame = CGRect(x: 10, y: 10, width: self.view.frame.width - 20, height: 300)
+         //self.settingButton.imageView?.frame = frame
+        //print("ran sizeButtonImages")
 
     }
 
