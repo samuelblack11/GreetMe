@@ -33,50 +33,32 @@ class FinalizeCardViewController: UIViewController {
     var appDelegate: AppDelegate {
      return UIApplication.shared.delegate as! AppDelegate
     }
-    
-    
     @IBOutlet weak var navItem: UINavigationItem!
-    
-    
-    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
-    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
-    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
-        
-
-    
-    @objc func clickBackButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    @objc func clickMenuButton() {
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
-        self.present(controller, animated: true, completion: nil)
-        
-    }
-    
-    
+    @IBOutlet weak var saveButton: UIButton!
     
     func determineCardSource() {
         
         // If just created a new card
         if appDelegate.lastSegue == "writeNoteToFinalize" {
+            saveButton.isEnabled = true
             collageView.image = UIImage(data: collageImage!)
             noteView.text = noteText!
             noteView.font = noteFont!
+            // collageImage set from prepare segue in WriteNoteViewController
             // name set from prepare segue in WriteNoteViewController
             // occassion set from prepare segue in WriteNoteViewController
             // Date set below in saveToCoreDate() function
+            
         }
         
         // If reading data from PriorViewController
        else if appDelegate.lastSegue == "priorToFinalize" {
+           saveButton.isEnabled = false
            collageImage = card.collage
            collageView.image = UIImage(data: collageImage!)
            name = card.recipient
            occassion = card.occassion
            date = card.date
-           
            
            do {
                if let noteObject = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(card.message) as? UITextView {
@@ -97,7 +79,7 @@ class FinalizeCardViewController: UIViewController {
         imageFill(imageView: collageView)
         //determineRecipient()
         navItem.leftBarButtonItems = [backButton]
-        navItem.rightBarButtonItems = [menuButton]
+        navItem.rightBarButtonItems = [menuButton3]
         }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,58 +90,6 @@ class FinalizeCardViewController: UIViewController {
     func imageFill(imageView: UIImageView!) {
         imageView.contentMode = UIView.ContentMode.scaleAspectFill
     }
-    
-
-    func prepCardForExport() -> Data {
-        
-        // https://www.advancedswift.com/resize-uiimage-no-stretching-swift/
-        let imageRect_w = 350
-        let imageRect_h = 325
-        let imageRect_dy = CGFloat(30)
-        let pageRect_X_offset = CGFloat(15)
-        let imageRect_dx = CGFloat(imageRect_w/3)
-        let pageRect_Y_offset = CGFloat(imageRect_h + Int(imageRect_dy) + 30)
-        
-        
-        let a4_width = 595.2 - 20
-        let a4_height = 841.8
-        //let us_letter_width = 612
-        //let us_letter_height = 792
-        let note_height = a4_height
-
-        let imageRect = CGRect(x: 0, y: 0, width: imageRect_w , height: imageRect_h)
-        let image = UIImage(data: collageImage!)!
-
-        // https://www.hackingwithswift.com/example-code/uikit/how-to-render-pdfs-using-uigraphicspdfrenderer
-        let pageRect = CGRect(x: 0, y: 0, width: a4_width, height: note_height)
-        let renderer = UIGraphicsPDFRenderer(bounds: pageRect)
-        let textAttributes = [NSAttributedString.Key.font: noteView.font]
-        let formattedText = NSAttributedString(string: noteView.text, attributes: textAttributes as [NSAttributedString.Key : Any])
-        
-        let data = renderer.pdfData(actions: {ctx in ctx.beginPage()
-            // Append formattedText to collageView
-                //.insetBy(dx: 50, dy: 50)
-            // https://www.hackingwithswift.com/articles/103/seven-useful-methods-from-cgrect
-            image.draw(in: imageRect.offsetBy(dx: imageRect_dx, dy: imageRect_dy))
-            formattedText.draw(in: pageRect.offsetBy(dx: pageRect_X_offset, dy: pageRect_Y_offset))
-        })
-        return data
-    }
-
-    
-    
-    
-    
-    func shareCard(cardInstance: Card) {
-        //var ntoeView2 = some View
-        cardExport = prepCardForExport()
-        // https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
-        let shareController = UIActivityViewController(activityItems: [cardExport!], applicationActivities: nil)
-        shareController.popoverPresentationController?.sourceView = self.view
-        self.present(shareController, animated: true, completion: nil)
-    }
-    
-    
     
     @IBAction func saveAction(_ sender: Any) {
         saveToCoreData()
@@ -195,30 +125,48 @@ class FinalizeCardViewController: UIViewController {
     }
     
     @IBAction func shareAction(_ sender: Any) {
-        sendCard()
+        cardExport = prepCardForExport()
+        // https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
+        let shareController = UIActivityViewController(activityItems: [cardExport!], applicationActivities: nil)
+        shareController.popoverPresentationController?.sourceView = self.view
+        self.present(shareController, animated: true, completion: nil)
     }
     
-    
-    
-    func sendCard() {
+    func prepCardForExport() -> Data {
         
-        // if last segue was
-        // store variable (lastSegue) in appdelegate. default value is ""
-        // to be name of segue from writenote to final
-        // if segue from collection view, set value to be that segue name
-        if appDelegate.lastSegue == "writeNoteToFinalize" {
-            shareCard(cardInstance: card)
-            }
-        else if appDelegate.lastSegue == "priorToFinalize"  {
-        do {
-            card.card = try NSKeyedArchiver.archivedData(withRootObject: cardStack!, requiringSecureCoding: false)
-            shareCard(cardInstance: card)
-        }
-        catch {
-            print("Error Archiving Card Data")
-            }
-            }
-        }
+        // https://www.advancedswift.com/resize-uiimage-no-stretching-swift/
+        let imageRect_w = 350
+        let imageRect_h = 325
+        let imageRect_dy = CGFloat(30)
+        let pageRect_X_offset = CGFloat(15)
+        let imageRect_dx = CGFloat(imageRect_w/3)
+        let pageRect_Y_offset = CGFloat(imageRect_h + Int(imageRect_dy) + 30)
+        
+        
+        let a4_width = 595.2 - 20
+        let a4_height = 841.8
+        //let us_letter_width = 612
+        //let us_letter_height = 792
+        let note_height = a4_height
+
+        let imageRect = CGRect(x: 0, y: 0, width: imageRect_w , height: imageRect_h)
+        let image = UIImage(data: collageImage!)!
+
+        // https://www.hackingwithswift.com/example-code/uikit/how-to-render-pdfs-using-uigraphicspdfrenderer
+        let pageRect = CGRect(x: 0, y: 0, width: a4_width, height: note_height)
+        let renderer = UIGraphicsPDFRenderer(bounds: pageRect)
+        let textAttributes = [NSAttributedString.Key.font: noteView.font]
+        let formattedText = NSAttributedString(string: noteView.text, attributes: textAttributes as [NSAttributedString.Key : Any])
+        
+        let data = renderer.pdfData(actions: {ctx in ctx.beginPage()
+            // Append formattedText to collageView
+                //.insetBy(dx: 50, dy: 50)
+            // https://www.hackingwithswift.com/articles/103/seven-useful-methods-from-cgrect
+            image.draw(in: imageRect.offsetBy(dx: imageRect_dx, dy: imageRect_dy))
+            formattedText.draw(in: pageRect.offsetBy(dx: pageRect_X_offset, dy: pageRect_Y_offset))
+        })
+        return data
+    }
     
     func saveContext() {
         if DataController.shared.viewContext.hasChanges {
@@ -255,4 +203,24 @@ class FinalizeCardViewController: UIViewController {
             print("Can't find Phone Number for Contact Name Entered")
             }
         }
+    
+    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
+    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
+    let menuButton3 = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: FinalizeCardViewController.self, action: #selector(clickMenuButtonFinalizeVC))
+    
+    
+    
+
+    @objc func clickBackButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @objc func clickMenuButtonFinalizeVC() {
+        print("Function Working")
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    
 }

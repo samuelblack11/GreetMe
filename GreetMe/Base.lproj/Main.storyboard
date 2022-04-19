@@ -272,8 +272,8 @@
         <!--UnsplashCollectionViewController-->
         <scene sceneID="Cw1-L8-dbR">
             <objects>
-                <collectionViewController id="BGn-a1-gG9" userLabel="UnsplashCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="44c-Nn-WJs">
+                <collectionViewController id="BGn-a1-gG9" userLabel="UnsplashCollectionViewController" customClass="UnsplashCollectionViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="unsplashCollectionView" dataMode="prototypes" id="44c-Nn-WJs" userLabel="unsplashCollectionView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -284,13 +284,25 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cs9-OS-KnD">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="unsplashCell" reuseIdentifier="unsplashCell" id="cs9-OS-KnD" userLabel="unsplashCell" customClass="UnsplashCell" customModule="GreetMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XDS-lf-BFa">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" restorationIdentifier="unsplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="K9E-VL-tQa" userLabel="unsplashImage">
+                                            <rect key="frame" x="8" y="8" width="112" height="112"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="unsplashImage" label="unsplashImage">
+                                                <bool key="isElement" value="YES"/>
+                                            </accessibility>
+                                        </imageView>
+                                    </subviews>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="unsplashImage" destination="K9E-VL-tQa" id="kXk-E6-Fer"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -299,10 +311,13 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="Vbh-C6-TPe"/>
+                    <connections>
+                        <outlet property="unsplashCollectionView" destination="44c-Nn-WJs" id="Chq-XX-k9v"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8MD-si-cQd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3854" y="-1444"/>
+            <point key="canvasLocation" x="3853.6231884057975" y="-1444.4196428571429"/>
         </scene>
         <!--ImportPhotoViewController-->
         <scene sceneID="l6g-8l-X4O">
@@ -426,14 +441,6 @@
                                     <constraint firstAttribute="height" constant="200" id="poJ-Mx-t2i"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vae-EI-WfH">
-                                <rect key="frame" x="150" y="791" width="114.5" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Test PhotoAPI"/>
-                                <connections>
-                                    <action selector="testPhotoAPI:" destination="zMw-sT-llV" eventType="touchUpInside" id="arN-ez-o8v"/>
-                                </connections>
-                            </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JbN-Db-HLe">
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <items>
@@ -441,37 +448,43 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJF-4V-ilH">
-                                <rect key="frame" x="104.5" y="740" width="205.5" height="31"/>
+                                <rect key="frame" x="104.5" y="786" width="205.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="checkmark.seal.fill" catalog="system" title=" Finalize Photo Selection"/>
                                 <connections>
                                     <action selector="finalizePhotos" destination="zMw-sT-llV" eventType="touchUpInside" id="brX-GI-THq"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" restorationIdentifier="userSearch" translatesAutoresizingMaskIntoConstraints="NO" id="ZKf-oz-CvB" userLabel="userSearch">
+                                <rect key="frame" x="0.0" y="100" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ljq-X6-jaJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fXB-vT-v0h" firstAttribute="leading" secondItem="VYv-pn-CaR" secondAttribute="trailing" constant="10" id="1H9-I0-Isg"/>
-                            <constraint firstItem="Vae-EI-WfH" firstAttribute="top" secondItem="cJF-4V-ilH" secondAttribute="bottom" constant="20" id="AeM-av-lk5"/>
+                            <constraint firstItem="ZKf-oz-CvB" firstAttribute="leading" secondItem="ljq-X6-jaJ" secondAttribute="leading" id="5Td-if-USb"/>
                             <constraint firstItem="4QU-Bn-kG8" firstAttribute="centerX" secondItem="WA4-e7-k3k" secondAttribute="centerX" id="B2q-qo-8On"/>
+                            <constraint firstItem="ljq-X6-jaJ" firstAttribute="bottom" secondItem="cJF-4V-ilH" secondAttribute="bottom" constant="25" id="BfN-gl-All"/>
                             <constraint firstItem="VYv-pn-CaR" firstAttribute="centerX" secondItem="WA4-e7-k3k" secondAttribute="centerX" id="Dqv-mY-SOi"/>
                             <constraint firstItem="dVL-lf-L8i" firstAttribute="leading" secondItem="EEa-tH-3xK" secondAttribute="trailing" constant="10" id="FDw-4A-zu5"/>
                             <constraint firstItem="VYv-pn-CaR" firstAttribute="top" secondItem="4QU-Bn-kG8" secondAttribute="bottom" constant="35" id="Fsd-s5-nr1"/>
                             <constraint firstItem="fXB-vT-v0h" firstAttribute="top" secondItem="4QU-Bn-kG8" secondAttribute="bottom" constant="35" id="H8f-sg-E50"/>
-                            <constraint firstItem="Vae-EI-WfH" firstAttribute="centerX" secondItem="WA4-e7-k3k" secondAttribute="centerX" id="K3L-jx-pPS"/>
                             <constraint firstItem="BfG-YB-taT" firstAttribute="top" secondItem="4QU-Bn-kG8" secondAttribute="bottom" constant="35" id="LPc-aj-mAC"/>
                             <constraint firstItem="4QU-Bn-kG8" firstAttribute="centerY" secondItem="WA4-e7-k3k" secondAttribute="centerY" id="NlZ-Fz-g4e"/>
                             <constraint firstItem="dVL-lf-L8i" firstAttribute="centerX" secondItem="WA4-e7-k3k" secondAttribute="centerX" id="RA4-LR-KOf"/>
+                            <constraint firstItem="ZKf-oz-CvB" firstAttribute="trailing" secondItem="ljq-X6-jaJ" secondAttribute="trailing" id="Rid-pF-yJu"/>
                             <constraint firstItem="4QU-Bn-kG8" firstAttribute="top" secondItem="tv5-4h-9qw" secondAttribute="bottom" constant="35" id="Tpz-cF-zTt"/>
                             <constraint firstItem="JbN-Db-HLe" firstAttribute="trailing" secondItem="ljq-X6-jaJ" secondAttribute="trailing" id="WU2-v6-bN1"/>
                             <constraint firstItem="VYv-pn-CaR" firstAttribute="leading" secondItem="BfG-YB-taT" secondAttribute="trailing" constant="10" id="XKj-D1-O2L"/>
                             <constraint firstItem="JbN-Db-HLe" firstAttribute="leading" secondItem="ljq-X6-jaJ" secondAttribute="leading" id="dSF-5h-rXM"/>
+                            <constraint firstItem="cJF-4V-ilH" firstAttribute="centerX" secondItem="WA4-e7-k3k" secondAttribute="centerX" id="ffb-ql-U0t"/>
                             <constraint firstItem="fXB-vT-v0h" firstAttribute="leading" secondItem="tv5-4h-9qw" secondAttribute="leading" id="hO8-TV-IpA"/>
                             <constraint firstItem="tv5-4h-9qw" firstAttribute="leading" secondItem="dVL-lf-L8i" secondAttribute="trailing" constant="10" id="k4l-ch-FYw"/>
-                            <constraint firstItem="ljq-X6-jaJ" firstAttribute="bottom" secondItem="Vae-EI-WfH" secondAttribute="bottom" constant="20" id="lQK-N2-oeS"/>
                             <constraint firstItem="cJF-4V-ilH" firstAttribute="centerX" secondItem="WA4-e7-k3k" secondAttribute="centerX" id="m4Y-Vf-Gm9"/>
                             <constraint firstItem="JbN-Db-HLe" firstAttribute="top" secondItem="WA4-e7-k3k" secondAttribute="topMargin" id="tCC-jN-2bM"/>
+                            <constraint firstItem="ZKf-oz-CvB" firstAttribute="top" secondItem="JbN-Db-HLe" secondAttribute="bottom" id="u13-uq-ljt"/>
                             <constraint firstItem="4QU-Bn-kG8" firstAttribute="top" secondItem="dVL-lf-L8i" secondAttribute="bottom" constant="35" id="uSE-i5-Mql"/>
                             <constraint firstItem="4QU-Bn-kG8" firstAttribute="top" secondItem="EEa-tH-3xK" secondAttribute="bottom" constant="35" id="yvx-lc-KLz"/>
                         </constraints>
@@ -488,6 +501,7 @@
                         <outlet property="photo3Preview" destination="lPv-uP-7Zw" id="UmX-mJ-hTM"/>
                         <outlet property="photo4Button" destination="fXB-vT-v0h" id="36f-aC-gXr"/>
                         <outlet property="photo4Preview" destination="2UX-y2-wwZ" id="wse-BZ-CH6"/>
+                        <outlet property="userSearch" destination="ZKf-oz-CvB" id="HuT-0d-okr"/>
                         <segue destination="vco-ZT-wgu" kind="show" identifier="photoToNote" id="qWz-Pf-3dI"/>
                         <segue destination="BGn-a1-gG9" kind="show" identifier="importToUnsplash" id="QcQ-Jc-MFY"/>
                     </connections>
@@ -707,6 +721,7 @@
                             <constraint firstItem="wje-3t-oBN" firstAttribute="trailing" secondItem="SVX-ys-Tp3" secondAttribute="trailing" constant="20" id="zi8-cW-UEL"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="rw7-TB-imS"/>
                     <connections>
                         <outlet property="nameField" destination="SVX-ys-Tp3" id="N0X-12-o8a"/>
                         <outlet property="navItem" destination="gXS-Hk-OJL" id="vQe-fa-g2i"/>
@@ -770,7 +785,6 @@
                                 <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up.fill" catalog="system" title=" Share"/>
                                 <connections>
                                     <action selector="shareAction:" destination="wNo-65-Jk0" eventType="touchUpInside" id="I69-MZ-OWM"/>
-                                    <action selector="shareCard:" destination="wNo-65-Jk0" eventType="touchUpInside" id="20I-WX-Llm"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Bw-Dj-FbS">
@@ -805,11 +819,12 @@
                         <outlet property="collageView" destination="RuG-NL-wf6" id="e8n-Y3-6bt"/>
                         <outlet property="navItem" destination="YJW-ed-wHa" id="VMD-ka-ERA"/>
                         <outlet property="noteView" destination="aBW-se-ABt" id="GXq-uq-18L"/>
+                        <outlet property="saveButton" destination="x12-yh-43a" id="LBF-jv-Ozf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SlA-KL-O9W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4792.753623188406" y="-642.1875"/>
+            <point key="canvasLocation" x="5107" y="-642"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

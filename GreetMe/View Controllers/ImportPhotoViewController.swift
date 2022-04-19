@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class ImportPhotoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ImportPhotoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var photo1Button: UIButton!
     @IBOutlet weak var photo2Button: UIButton!
@@ -22,24 +22,25 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var photo4Preview: UIImageView!
     @IBOutlet weak var collage: UIStackView!
     var menu: UIMenu!
-    
-
     @IBOutlet weak var navTitle: UINavigationItem!
-        
-    var barItems = [UIBarButtonItem]()
-
+    @IBOutlet weak var userSearch: UISearchBar!
+    var searchText: String!
+    
+    
+    
+    
+    // https://www.hackingwithswift.com/read/7/3/parsing-json-using-the-codable-protocol
+    var unsplashPhotos = [PicResponse]()
     
     // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
     let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
-    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
+    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButtonImportVC))
     
     @objc func clickBackButton() {
         self.dismiss(animated: true, completion: nil)
     }
     
-
-    
-    @objc func clickMenuButton() {
+    @objc func clickMenuButtonImportVC() {
         let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
         self.present(controller, animated: true, completion: nil)
     }
@@ -48,7 +49,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         self.performSegue(withIdentifier: "photoToNote", sender: nil)
     }
     
-    
     // https://medium.nextlevelswift.com/creating-a-native-popup-menu-over-a-uibutton-or-uinavigationbar-645edf0329c4
     func createSubMenu() -> UIMenu {
         let photoLibraryItem =  UIAction(title: "Photo Library", image: UIImage(systemName: "photo.on.rectangle")) { (action) in
@@ -56,15 +56,41 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
        }
         
         let searchAPIForphotoItem = UIAction(title: "Search The Web", image: UIImage(systemName: "magnifyingglass")) { (action) in
-            }
+            // show search bar
+            self.userSearch.isHidden = false
+            // Get photos based on user entry
+        }
         
         let menu = UIMenu(title: "Choose a Photo Selection Method", options: .displayInline, children: [photoLibraryItem, searchAPIForphotoItem])
         return menu
-    
     }
     
     
     
+    // https://guides.codepath.com/ios/Search-Bar-Guide
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.isHidden = false
+        if searchBar.text != nil {
+            searchText = searchBar.text
+            PhotoAPI.getPhoto(randomSearch: searchText)
+            performSegue(withIdentifier: "importToUnsplash", sender: nil)
+        }
+        
+        else if searchBar.text == nil {
+            sendAlert(title: "Please Type a Value To Search", message: "this field is required in order to search")
+        }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+  
     func imageFill(imageView: UIImageView!) {
         imageView.contentMode = UIView.ContentMode.scaleAspectFill
     }
@@ -78,8 +104,9 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
 
         navTitle.leftBarButtonItems = [backButton, menuButton]
         navTitle.rightBarButtonItems = [menuButton]
-
-
+        userSearch.delegate = self
+        userSearch.isHidden = true
+        //= UIColor.lightGray
     }
     
     @IBAction func selectPhoto1(_ sender: Any) {
@@ -98,12 +125,14 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func selectPhoto3(_ sender: Any) {
         lastButtonPressed = 3
+        menu = createSubMenu()
         photo3Button.menu = menu
         photo3Button.showsMenuAsPrimaryAction = true
     }
     
     @IBAction func selectPhoto4(_ sender: Any) {
         lastButtonPressed = 4
+        menu = createSubMenu()
         photo4Button.menu = menu
         photo4Button.showsMenuAsPrimaryAction = true
     }
@@ -117,21 +146,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         selectPhoto.sourceType = .photoLibrary
         present(selectPhoto, animated: true, completion: nil)
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    @IBAction func testPhotoAPI(_ sender: Any) {
-        PhotoAPI.getPhoto(randomSearch: "Baklava")
-    }
-    
-    
-    
-    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage{
@@ -174,13 +188,13 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             controller.collageImage = (collageImage.pngData())!
             
         if segue.identifier == "importToUnsplash" {
-            let controller = segue.destination as! UnsplashPicker
+            let controller = segue.destination as! UnsplashCollectionViewController
             //controller.unsplashPhotos = pics
                 
             }
         
-            }
         }
+    }
     
     func saveContext() {
         if DataController.shared.viewContext.hasChanges {
@@ -191,4 +205,17 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             }
         }
     }
+    
+    func sendAlert(title: String, message: String) {
+    // https://stackoverflow.com/questions/24195310/how-to-add-an-action-to-a-uialertview-button-using-swift-ios
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+        let dismissAction = UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default) {
+                UIAlertAction in NSLog("Dismiss Pressed")
+        }
+            
+        alertController.addAction(dismissAction)
+        self.present(alertController,animated: true, completion: nil)
+    }
+
 }

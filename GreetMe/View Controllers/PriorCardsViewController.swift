@@ -15,18 +15,14 @@ class PriorCardsViewController: UIViewController, UICollectionViewDelegate, UICo
     var cards = [Card]()
     var card: Card!
     var menu: UIMenu!
-    
     var chosenCollage: UIImageView!
     var chosenNoteField: UITextView!
-    
     var appDelegate: AppDelegate {
      return UIApplication.shared.delegate as! AppDelegate
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var navItem: UINavigationItem!
-    
     @IBOutlet weak var collectionViewLayoutFromStoryboard: UICollectionViewFlowLayout!
     
     

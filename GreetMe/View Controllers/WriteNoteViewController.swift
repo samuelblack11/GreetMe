@@ -35,7 +35,7 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     
     // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
     let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
-    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
+    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButtonWriteNoteVC))
         
 
     
@@ -44,7 +44,7 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     }
     
     
-    @objc func clickMenuButton() {
+    @objc func clickMenuButtonWriteNoteVC() {
         let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
         self.present(controller, animated: true, completion: nil)
         
@@ -60,8 +60,8 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
         if occasionField.text == ""  &&  nameField.text != "" {
             sendAlert(title: "Please Enter the Occassion for Sending the Card", message: "(this field is required)")
             }
-        performSegue(withIdentifier: "writeNoteToFinalize", sender: nil)
         appDelegate.lastSegue = "writeNoteToFinalize"
+        performSegue(withIdentifier: "writeNoteToFinalize", sender: nil)
     }
     
     
@@ -117,8 +117,6 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
         }
     }
     
-
-    
     // https://www.hackingwithswift.com/example-code/uikit/how-to-limit-the-number-of-characters-in-a-uitextfield-or-uitextview
     // Set Character Limit
     // Use this if you have a UITextView
@@ -136,8 +134,6 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
         return updatedText.count <= 140
     }
     
-    
-    
     // https://www.hackingwithswift.com/example-code/system/how-to-pass-data-between-two-view-controllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "writeNoteToFinalize" {
@@ -151,12 +147,6 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
         
             }
         }
-    
-    
-    
-
-    
-    
     
     func sendAlert(title: String, message: String) {
     // https://stackoverflow.com/questions/24195310/how-to-add-an-action-to-a-uialertview-button-using-swift-ios
@@ -179,7 +169,5 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
             }
         }
     }
-    
-    
     
 }

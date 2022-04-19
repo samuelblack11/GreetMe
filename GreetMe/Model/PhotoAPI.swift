@@ -41,7 +41,9 @@ class PhotoAPI {
     
     
     //Must make this a class func in order to call the function properly in ImportPhotoViewController
-    class func getPhoto(randomSearch: String) {
+   // class func getPhoto(randomSearch: String, completionHandler: @escaping ([PicResponse]?,Error?) -> Void) {
+        
+        class func getPhoto(randomSearch: String) {
         
         // https://cocoacasts.com/networking-fundamentals-how-to-make-an-http-request-in-swift
         let pageNumber = Int.random(in: 0...5)
@@ -63,16 +65,20 @@ class PhotoAPI {
             // Completion Handler is Below
             { data, response, error in
             // If data response not null
-            print(data)
-            print("DATA ------------")
             print(String(data: data!, encoding: .utf8))
             if let data = data {
                 // Create JSONDecoder instance and invoke decode function, passing in type of value to decode from the supplied JSON object and the JSON object to decode
-                print(response)
-                print("data = data")
                 if let pics = try? JSONDecoder().decode(PicResponse.self, from: data) {
                     print("Valid Response")
                     print(pics)
+                    print("------------")
+                    print(pics.results)
+                    print("----------")
+                    //DispatchQueue.main.async {
+                    //    completionHandler(pics.results.urls.small)
+                   // }
+                    
+                    
                 }
                 else {
                     print("Invalid Response")
@@ -86,7 +92,6 @@ class PhotoAPI {
         task.resume()
 
     }
-     
 }
 
 

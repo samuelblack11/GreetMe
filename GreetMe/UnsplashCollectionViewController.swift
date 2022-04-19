@@ -7,31 +7,41 @@
 
 import Foundation
 import UIKit
-import UnsplashPhotoPicker
+//import UnsplashPhotoPicker
 
 
-class UnsplashPicker: UICollectionViewController {
+class UnsplashCollectionViewController: UICollectionViewController {
     
     var unsplashPhotos: PicResponse!
-    
+    @IBOutlet var unsplashCollectionView: UICollectionView!
     
     override func viewDidLoad() {
-        <#code#>
+        loadUnsplashPhotos()
+        print("test")
     }
     
     
+    func loadUnsplashPhotos() {
+        //unsplashPhotos =
+        unsplashCollectionView.reloadData()
+    }
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "unsplashCell", for: indexPath) as! UnsplashCell
+        
+        //let picture =
+        
+       return cell
     }
     
+
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
+        print("test")
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        1
     }
     
     
