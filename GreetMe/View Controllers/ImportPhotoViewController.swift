@@ -26,11 +26,8 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var userSearch: UISearchBar!
     var searchText: String!
     
-    
-    
-    
     // https://www.hackingwithswift.com/read/7/3/parsing-json-using-the-codable-protocol
-    var unsplashPhotos = [PicResponse]()
+    var unsplashPhotos: PicResponse!
     
     // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
     let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
@@ -72,7 +69,17 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         searchBar.isHidden = false
         if searchBar.text != nil {
             searchText = searchBar.text
-            PhotoAPI.getPhoto(randomSearch: searchText)
+            print("-------")
+            print(searchText!)
+            PhotoAPI.getPhoto(userSearch: searchText!, completionHandler: { (response, error) in
+                if response != nil {
+                    print("Response in ImportPhotoVC:.....")
+                    //print(response)
+                    print(response!.results)
+                    //print(response!.results)
+                    self.unsplashPhotos = response!
+                } 
+            })
             performSegue(withIdentifier: "importToUnsplash", sender: nil)
         }
         
