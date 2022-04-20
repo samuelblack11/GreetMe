@@ -12,6 +12,10 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var lastSegue: String = ""
+    
+    var unsplashSmallPhotoURLs: [String] = [""]
+    var unsplashSmallPhotos: [UIImage] = []
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

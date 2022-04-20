@@ -16,12 +16,12 @@ struct PicResponse: Decodable {
  
 // CONFIRMED KEYS
 struct ResultDetails: Decodable {
-    let id: String?
-    let created_at: String?
+    let id: String
+    let created_at: String
     let updated_at: String?
     let promoted_at: String?
-    let width: Int?
-    let height: Int?
+    let width: Int
+    let height: Int
     let color: String?
     let blur_hash: String?
     let description: String?

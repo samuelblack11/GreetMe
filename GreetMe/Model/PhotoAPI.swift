@@ -39,7 +39,7 @@ class PhotoAPI {
     
     
     //Must make this a class func in order to call the function properly in ImportPhotoViewController
-   class func getPhoto(userSearch: String, completionHandler: @escaping (PicResponse?,Error?) -> Void) {
+   class func getPhoto(userSearch: String, completionHandler: @escaping ([ResultDetails]?,Error?) -> Void) {
         //class func getPhoto(randomSearch: String) {
         // https://cocoacasts.com/networking-fundamentals-how-to-make-an-http-request-in-swift
         let pageNumber = Int.random(in: 0...5)
@@ -81,7 +81,7 @@ class PhotoAPI {
                     print("----------")
                     
                     DispatchQueue.main.async {
-                        completionHandler(pics, nil)
+                        completionHandler(pics.results, nil)
                    }
                 }
                 catch {

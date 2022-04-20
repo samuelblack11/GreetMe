@@ -25,10 +25,14 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var userSearch: UISearchBar!
     var searchText: String!
+
+
     
     // https://www.hackingwithswift.com/read/7/3/parsing-json-using-the-codable-protocol
-    var unsplashPhotos: PicResponse!
-    
+    var unsplashPhotos: [ResultDetails]!
+    var appDelegate: AppDelegate {
+     return UIApplication.shared.delegate as! AppDelegate
+    }
     // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
     let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
     let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButtonImportVC))
@@ -74,10 +78,20 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             PhotoAPI.getPhoto(userSearch: searchText!, completionHandler: { (response, error) in
                 if response != nil {
                     print("Response in ImportPhotoVC:.....")
-                    //print(response)
-                    print(response!.results)
+                    //print(response!)
                     //print(response!.results)
-                    self.unsplashPhotos = response!
+                    for picture in response! {
+                        //print(picture)
+                        // if url not nil
+                        if picture.urls.small != nil {
+                            // append url to list of urls, which will then be converted to images in UnsplashCollectionViewController
+                            print(picture.urls.small!)
+                            self.appDelegate.unsplashSmallPhotoURLs.append(picture.urls.small!)
+
+                        }
+                    }
+                    print("# of URLs appended to list \(self.appDelegate.unsplashSmallPhotoURLs.count)")
+                    
                 } 
             })
             performSegue(withIdentifier: "importToUnsplash", sender: nil)
