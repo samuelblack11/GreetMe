@@ -33,6 +33,8 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     var appDelegate: AppDelegate {
      return UIApplication.shared.delegate as! AppDelegate
     }
+    var unsplashSmallPhotoURLs: [String] = [""]
+
     // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
     let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
     let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButtonImportVC))
@@ -75,25 +77,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             searchText = searchBar.text
             print("-------")
             print(searchText!)
-            PhotoAPI.getPhoto(userSearch: searchText!, completionHandler: { (response, error) in
-                if response != nil {
-                    print("Response in ImportPhotoVC:.....")
-                    //print(response!)
-                    //print(response!.results)
-                    for picture in response! {
-                        //print(picture)
-                        // if url not nil
-                        if picture.urls.small != nil {
-                            // append url to list of urls, which will then be converted to images in UnsplashCollectionViewController
-                            print(picture.urls.small!)
-                            self.appDelegate.unsplashSmallPhotoURLs.append(picture.urls.small!)
-
-                        }
-                    }
-                    print("# of URLs appended to list \(self.appDelegate.unsplashSmallPhotoURLs.count)")
-                    
-                } 
-            })
             performSegue(withIdentifier: "importToUnsplash", sender: nil)
         }
         
@@ -207,14 +190,14 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             
             let controller = segue.destination as! WriteNoteViewController
             controller.collageImage = (collageImage.pngData())!
-            
+        }
         if segue.identifier == "importToUnsplash" {
             let controller = segue.destination as! UnsplashCollectionViewController
-            //controller.unsplashPhotos = pics
+            print("controller.searchText = searchText")
+            controller.searchText = searchText
+
                 
             }
-        
-        }
     }
     
     func saveContext() {
