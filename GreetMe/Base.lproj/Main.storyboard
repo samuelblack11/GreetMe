@@ -322,6 +322,7 @@
                     <navigationItem key="navigationItem" id="Vbh-C6-TPe"/>
                     <connections>
                         <outlet property="unsplashCollectionView" destination="44c-Nn-WJs" id="Chq-XX-k9v"/>
+                        <segue destination="zMw-sT-llV" kind="show" identifier="unsplashToImport" id="sQT-Nk-Ynp"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8MD-si-cQd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -838,6 +839,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vdk-S4-aO4"/>
+        <segue reference="sQT-Nk-Ynp"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Carafe and Dish With Citrus Fruit" width="342" height="413"/>

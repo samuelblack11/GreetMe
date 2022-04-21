@@ -25,6 +25,8 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var userSearch: UISearchBar!
     var searchText: String!
+    var chosenUnsplashImage: UIImage!
+
 
 
     
