@@ -27,7 +27,7 @@ class PhotoAPI {
         switch self {
             case .searchedWords(let page_num, let userSearch ):
             return Endpoints.baseURL + "page=\(page_num)&query=\(userSearch)&client_id=\(PhotoAPI.Endpoints.apiKey)"
-        case .random(let randomSearch):
+        case .random(_):
                 return Endpoints.baseURL + ""
             }
         }

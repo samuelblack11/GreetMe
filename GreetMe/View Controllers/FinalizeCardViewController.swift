@@ -33,8 +33,14 @@ class FinalizeCardViewController: UIViewController {
     var appDelegate: AppDelegate {
      return UIApplication.shared.delegate as! AppDelegate
     }
-    @IBOutlet weak var navItem: UINavigationItem!
+
     @IBOutlet weak var saveButton: UIButton!
+    
+    
+    @IBOutlet weak var menuButton: UIButton!
+    
+    
+    
     
     func determineCardSource() {
         
@@ -78,8 +84,7 @@ class FinalizeCardViewController: UIViewController {
         determineCardSource()
         imageFill(imageView: collageView)
         //determineRecipient()
-        navItem.leftBarButtonItems = [backButton]
-        navItem.rightBarButtonItems = [menuButton3]
+
         }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -178,6 +183,15 @@ class FinalizeCardViewController: UIViewController {
         }
     }
     
+    
+    
+    
+    @IBAction func clickMenuButton(_ sender: Any) {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    
     // https://developer.apple.com/documentation/contacts
     func determineRecipient() {
         print("Determining Recipient")
@@ -203,24 +217,4 @@ class FinalizeCardViewController: UIViewController {
             print("Can't find Phone Number for Contact Name Entered")
             }
         }
-    
-    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
-    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
-    let menuButton3 = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: FinalizeCardViewController.self, action: #selector(clickMenuButtonFinalizeVC))
-    
-    
-    
-
-    @objc func clickBackButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    @objc func clickMenuButtonFinalizeVC() {
-        print("Function Working")
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
-        self.present(controller, animated: true, completion: nil)
-    }
-    
-    
 }

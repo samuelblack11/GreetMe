@@ -20,25 +20,8 @@ class PriorCardsViewController: UIViewController, UICollectionViewDelegate, UICo
     var appDelegate: AppDelegate {
      return UIApplication.shared.delegate as! AppDelegate
     }
-    
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var collectionViewLayoutFromStoryboard: UICollectionViewFlowLayout!
-    
-    
-    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
-    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
-    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButton))
-        
-    @objc func clickBackButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func clickMenuButton() {
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
-        self.present(controller, animated: true, completion: nil)
-        
-    }
 
     //https://samwize.com/2015/11/30/understanding-uicollection-flow-layout/
     func setLayout() {
@@ -106,11 +89,6 @@ class PriorCardsViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.delegate = self
         collectionView.dataSource = self
         loadCoreData()
-        //setLayout()
-        //deleteCoreData()
-        navItem.leftBarButtonItems = [backButton]
-        navItem.rightBarButtonItems = [menuButton]
-
     }
     
     override func viewWillAppear(_ animated: Bool) {

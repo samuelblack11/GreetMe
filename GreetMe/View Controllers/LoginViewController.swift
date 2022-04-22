@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
     
     // When "Sign In with Apple" Button is Tapped, call handleAppleIdRequest()
     @IBAction func loginFunction(_ sender: Any) {
-        performSegue(withIdentifier: "loginToMenu", sender: nil)
+        performSegue(withIdentifier: "loginToNav", sender: nil)
         //handleAppleIdRequest()
     }
     
@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
     spinActivityIndicator(false)
         }
         print("Perform Segue")
-        performSegue(withIdentifier: "loginToMenu", sender: self)
+        performSegue(withIdentifier: "loginToNav", sender: self)
     }
     
         

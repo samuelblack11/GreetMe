@@ -31,25 +31,6 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
     
     @IBOutlet weak var navItem: UINavigationItem!
     
-    
-    
-    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
-    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
-    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButtonWriteNoteVC))
-        
-
-    
-    @objc func clickBackButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    @objc func clickMenuButtonWriteNoteVC() {
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
-        self.present(controller, animated: true, completion: nil)
-        
-    }
-    
     @IBAction func writeNoteToFinalize() {
         
         if nameField.text == "" {
@@ -74,10 +55,6 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
         writeNoteField.text = "Write your message here :)"
         writeNoteField.textColor = UIColor.lightGray
         writeNoteField.font = writeNoteField.font?.withSize(14)
-
-        navItem.leftBarButtonItems = [backButton]
-        navItem.rightBarButtonItems = [menuButton]
-
     }
 
     

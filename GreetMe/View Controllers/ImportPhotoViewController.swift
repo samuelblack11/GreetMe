@@ -22,7 +22,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var photo4Preview: UIImageView!
     @IBOutlet weak var collage: UIStackView!
     var menu: UIMenu!
-    @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var userSearch: UISearchBar!
     var searchText: String!
     var searchBarText: String!
@@ -37,23 +36,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
      return UIApplication.shared.delegate as! AppDelegate
     }
     var unsplashSmallPhotoURLs: [String] = [""]
-
-    // https://www.hackingwithswift.com/example-code/uikit/how-to-add-a-bar-button-to-a-navigation-bar
-    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(clickBackButton))
-    let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButtonImportVC))
-    
-    @objc func clickBackButton() {
-        savePhotosToAppDelegate()
-        appDelegate.lastPhotoButtonPressed = lastButtonPressed
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func clickMenuButtonImportVC() {
-        savePhotosToAppDelegate()
-        appDelegate.lastPhotoButtonPressed = lastButtonPressed
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
-        self.present(controller, animated: true, completion: nil)
-    }
     
     @IBAction func finalizePhotos() {
         savePhotosToAppDelegate()
@@ -96,7 +78,7 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.isHidden = false
         if searchBar.text != nil {
-            searchBarText = searchBar.text?.replacingOccurrences(of: " ", with: "+")
+            searchBarText = searchBar.text?.replacingOccurrences(of: " ", with: "-")
             searchText = searchBarText
             print("-------")
             print(searchText!)
@@ -129,8 +111,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         imageFill(imageView: photo3Preview)
         imageFill(imageView: photo4Preview)
 
-        navTitle.leftBarButtonItems = [backButton, menuButton]
-        navTitle.rightBarButtonItems = [menuButton]
         userSearch.delegate = self
         userSearch.isHidden = true
 
