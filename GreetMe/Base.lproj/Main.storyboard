@@ -75,7 +75,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18.840579710144929" y="68.973214285714278"/>
+            <point key="canvasLocation" x="-22" y="-214"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="fs9-HA-i91">
@@ -159,115 +159,13 @@
                         <outlet property="addNewCardLabel" destination="gFL-Vf-tJJ" id="nQQ-Ee-dQY"/>
                         <outlet property="viewPriorCardsButton" destination="6XI-mN-6cr" id="ynw-bI-plP"/>
                         <outlet property="viewPriorCardsLabel" destination="8oE-oH-j0v" id="KXU-9n-7y6"/>
-                        <segue destination="Mka-QT-726" kind="show" identifier="menuToNewCardMenu" id="1oM-Fr-bYi"/>
                         <segue destination="KGC-yE-FOP" kind="show" identifier="menuToPriorCards" id="FO9-QH-4N1"/>
+                        <segue destination="zMw-sT-llV" kind="show" identifier="menuToPhoto" id="dSx-mc-u1d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vFR-Ff-stF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766.66666666666674" y="68.973214285714278"/>
-        </scene>
-        <!--NewCardMenuViewController-->
-        <scene sceneID="QW8-Uj-qEm">
-            <objects>
-                <viewController restorationIdentifier="NewCardMenuViewController" storyboardIdentifier="NewCardMenuViewController" id="Mka-QT-726" userLabel="NewCardMenuViewController" customClass="NewCardMenuViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RPG-Jf-pcz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import Photos and Create Collage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxr-4g-mEp" userLabel="createCollageLabel">
-                                <rect key="frame" x="78.5" y="319" width="257" height="21"/>
-                                <accessibility key="accessibilityConfiguration" identifier="createCollageLabel" label="createCollageLabel"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" name="AccentColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UO-3U-OAs" userLabel="createCollageButton">
-                                <rect key="frame" x="107" y="94" width="200" height="200"/>
-                                <accessibility key="accessibilityConfiguration" identifier="createCollageButton" label="createCollageButton"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Dwq-hY-03d"/>
-                                    <constraint firstAttribute="height" constant="200" id="vMU-G3-SP5"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
-                                <connections>
-                                    <action selector="createCollageSegue:" destination="Mka-QT-726" eventType="touchUpInside" id="Oq9-W1-YcC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRX-cx-b9j" userLabel="createCustomVisualButton">
-                                <rect key="frame" x="107" y="546" width="200" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="5uA-EK-Nqt"/>
-                                    <constraint firstAttribute="width" constant="200" id="Lfk-Z9-e4r"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="paintpalette.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="createCustomVisualOnClick:" destination="Mka-QT-726" eventType="touchUpInside" id="hsr-pN-s0U"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ew-6I-IHg" userLabel="centerLabel">
-                                <rect key="frame" x="186" y="455" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Custom Visual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCT-nd-ZGe" userLabel="createCustomVisualLabel">
-                                <rect key="frame" x="124.5" y="771" width="165" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" name="AccentColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="patrick-dozkVhDyvhQ-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="QXo-zg-RsD" userLabel="importImage">
-                                <rect key="frame" x="107" y="94" width="200" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="f93-m8-1h7"/>
-                                    <constraint firstAttribute="width" constant="200" id="iic-ZW-Ebd"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="kE8-S3-Pab"/>
-                                    <constraint firstAttribute="height" constant="200" id="xSY-1w-Psb"/>
-                                </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhang-xinxin-cWY499Ma1SQ-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="cO6-W6-2XS" userLabel="createCustomVisual">
-                                <rect key="frame" x="107" y="546" width="200" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="DsL-qN-SiU"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="PSg-JJ-1Rv"/>
-                                    <constraint firstAttribute="height" constant="200" id="b2i-ka-Ffs"/>
-                                    <constraint firstAttribute="width" constant="200" id="wiJ-vX-zc9"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="2ea-2M-IoA"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="2ea-2M-IoA" firstAttribute="bottom" secondItem="pCT-nd-ZGe" secondAttribute="bottom" constant="50" id="5fw-7X-fOK"/>
-                            <constraint firstItem="cO6-W6-2XS" firstAttribute="centerX" secondItem="RPG-Jf-pcz" secondAttribute="centerX" id="5hc-xS-ILj"/>
-                            <constraint firstItem="QXo-zg-RsD" firstAttribute="top" secondItem="2ea-2M-IoA" secondAttribute="top" constant="50" id="6Cj-we-75u"/>
-                            <constraint firstItem="pCT-nd-ZGe" firstAttribute="top" secondItem="cRX-cx-b9j" secondAttribute="bottom" constant="25" id="7eI-Sd-o2I"/>
-                            <constraint firstItem="pCT-nd-ZGe" firstAttribute="top" secondItem="cO6-W6-2XS" secondAttribute="bottom" constant="25" id="B58-i7-DcA"/>
-                            <constraint firstItem="pCT-nd-ZGe" firstAttribute="centerX" secondItem="RPG-Jf-pcz" secondAttribute="centerX" id="CrO-Wo-rdp"/>
-                            <constraint firstItem="3UO-3U-OAs" firstAttribute="top" secondItem="2ea-2M-IoA" secondAttribute="top" constant="50" id="Fl4-tU-bmm"/>
-                            <constraint firstItem="cRX-cx-b9j" firstAttribute="centerX" secondItem="RPG-Jf-pcz" secondAttribute="centerX" id="a0G-9U-pKB"/>
-                            <constraint firstItem="3UO-3U-OAs" firstAttribute="centerX" secondItem="RPG-Jf-pcz" secondAttribute="centerX" id="aq9-s2-RrJ"/>
-                            <constraint firstItem="Mxr-4g-mEp" firstAttribute="top" secondItem="3UO-3U-OAs" secondAttribute="bottom" constant="25" id="avG-pP-cW2"/>
-                            <constraint firstItem="QXo-zg-RsD" firstAttribute="centerX" secondItem="RPG-Jf-pcz" secondAttribute="centerX" id="c0K-51-3bO"/>
-                            <constraint firstItem="Mxr-4g-mEp" firstAttribute="centerX" secondItem="RPG-Jf-pcz" secondAttribute="centerX" id="pQ0-je-Wkr"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="ssK-nU-bHJ"/>
-                    <connections>
-                        <outlet property="createCollageButton" destination="3UO-3U-OAs" id="28B-fv-hWA"/>
-                        <outlet property="createCustomVisualButton" destination="cRX-cx-b9j" id="VI3-OH-xW5"/>
-                        <outlet property="createCustomVisualView" destination="cO6-W6-2XS" id="4P3-rX-deg"/>
-                        <outlet property="importImageView" destination="QXo-zg-RsD" id="pbW-XD-gNd"/>
-                        <segue destination="zMw-sT-llV" kind="show" identifier="menuToPhoto" id="UH0-gi-4pi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jLX-mE-ggo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1795.6521739130437" y="-642.1875"/>
+            <point key="canvasLocation" x="1067" y="-214"/>
         </scene>
         <!--UnsplashCollectionViewController-->
         <scene sceneID="Cw1-L8-dbR">
@@ -839,7 +737,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Vdk-S4-aO4"/>
-        <segue reference="sQT-Nk-Ynp"/>
+        <segue reference="dSx-mc-u1d"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Carafe and Dish With Citrus Fruit" width="342" height="413"/>
@@ -851,11 +749,8 @@
         <image name="checkmark.seal.fill" catalog="system" width="128" height="128"/>
         <image name="green-chameleon-s9CC2SKySJM-unsplash" width="5184" height="3456"/>
         <image name="greetingcard.fill" catalog="system" width="106" height="128"/>
-        <image name="paintpalette.fill" catalog="system" width="128" height="105"/>
-        <image name="patrick-dozkVhDyvhQ-unsplash" width="4962" height="3308"/>
         <image name="ranurte-VPTSnznXtyQ-unsplash" width="2818" height="3739"/>
         <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
-        <image name="zhang-xinxin-cWY499Ma1SQ-unsplash" width="4096" height="2304"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

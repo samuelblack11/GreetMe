@@ -25,6 +25,7 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var navTitle: UINavigationItem!
     @IBOutlet weak var userSearch: UISearchBar!
     var searchText: String!
+    var searchBarText: String!
     var chosenUnsplashImage: UIImage!
 
 
@@ -42,17 +43,20 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     let menuButton = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(clickMenuButtonImportVC))
     
     @objc func clickBackButton() {
+        savePhotosToAppDelegate()
         appDelegate.lastPhotoButtonPressed = lastButtonPressed
         self.dismiss(animated: true, completion: nil)
     }
     
     @objc func clickMenuButtonImportVC() {
+        savePhotosToAppDelegate()
         appDelegate.lastPhotoButtonPressed = lastButtonPressed
         let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
         self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func finalizePhotos() {
+        savePhotosToAppDelegate()
         appDelegate.lastPhotoButtonPressed = lastButtonPressed
         self.performSegue(withIdentifier: "photoToNote", sender: nil)
     }
@@ -65,12 +69,7 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         
         let searchAPIForphotoItem = UIAction(title: "Search The Web", image: UIImage(systemName: "magnifyingglass")) { (action) in
             // show search bar
-            
-            self.appDelegate.photo1 = self.photo1Preview.image
-            self.appDelegate.photo2 = self.photo2Preview.image
-            self.appDelegate.photo3 = self.photo3Preview.image
-            self.appDelegate.photo4 = self.photo4Preview.image
-
+            self.savePhotosToAppDelegate()
             self.userSearch.isHidden = false
             // Get photos based on user entry
         }
@@ -81,11 +80,24 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     
     
     
+    
+    
+    func savePhotosToAppDelegate() {
+        self.appDelegate.photo1 = self.photo1Preview.image
+        self.appDelegate.photo2 = self.photo2Preview.image
+        self.appDelegate.photo3 = self.photo3Preview.image
+        self.appDelegate.photo4 = self.photo4Preview.image
+        
+    }
+    
+    
+    
     // https://guides.codepath.com/ios/Search-Bar-Guide
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.isHidden = false
         if searchBar.text != nil {
-            searchText = searchBar.text
+            searchBarText = searchBar.text?.replacingOccurrences(of: " ", with: "+")
+            searchText = searchBarText
             print("-------")
             print(searchText!)
             performSegue(withIdentifier: "importToUnsplash", sender: nil)
@@ -125,25 +137,23 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     }
     
     
+
+    
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        if appDelegate.lastSegue  == "unsplashToImport" {
-            self.photo1Preview.image =  self.appDelegate.photo1
-            self.photo2Preview.image =  self.appDelegate.photo2
-            self.photo3Preview.image =  self.appDelegate.photo3
-            self.photo4Preview.image =  self.appDelegate.photo4
-        }
+        super.viewWillAppear(true)
+        self.photo1Preview.image =  self.appDelegate.photo1
+        self.photo2Preview.image =  self.appDelegate.photo2
+        self.photo3Preview.image =  self.appDelegate.photo3
+        self.photo4Preview.image =  self.appDelegate.photo4
         
         imageFill(imageView: photo1Preview)
         imageFill(imageView: photo2Preview)
         imageFill(imageView: photo3Preview)
         imageFill(imageView: photo4Preview)
         
-
         if appDelegate.chosenUnsplashImage != nil {
             if appDelegate.lastPhotoButtonPressed!  == 1 {
-
                 photo1Preview.image = appDelegate.chosenUnsplashImage!
             }
             if appDelegate.lastPhotoButtonPressed!  == 2 {
@@ -155,7 +165,12 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             if appDelegate.lastPhotoButtonPressed!  == 4 {
                 photo4Preview.image = appDelegate.chosenUnsplashImage!
             }
+            appDelegate.lastPhotoButtonPressed = 0
+            appDelegate.chosenUnsplashImage = nil
         }
+        savePhotosToAppDelegate()
+        print("App Delegate Last Photo Button Pressed.....")
+        print(appDelegate.lastPhotoButtonPressed)
     }
     
     
@@ -229,7 +244,8 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     // https://www.hackingwithswift.com/example-code/system/how-to-pass-data-between-two-view-controllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         appDelegate.lastPhotoButtonPressed = lastButtonPressed
-        if segue.identifier == "photoToNote" {            
+        if segue.identifier == "photoToNote" {
+            savePhotosToAppDelegate()
             // https://www.hackingwithswift.com/example-code/media/how-to-render-a-uiview-to-a-uiimage
             // Convert stack view (UIView) to image (UIImage)
             let renderer = UIGraphicsImageRenderer(size: collage.bounds.size)
@@ -241,6 +257,7 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             controller.collageImage = (collageImage.pngData())!
         }
         if segue.identifier == "importToUnsplash" {
+            savePhotosToAppDelegate()
             appDelegate.lastSegue = "importToUnsplash"
             let controller = segue.destination as! UnsplashCollectionViewController
             print("controller.searchText = searchText")

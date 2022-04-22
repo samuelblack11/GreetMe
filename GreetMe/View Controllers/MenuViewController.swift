@@ -37,7 +37,7 @@ class MenuViewController: UIViewController {
     
     // https://stackoverflow.com/questions/56960977/how-to-correctly-dismiss-previous-view-controller
     @IBAction func createNewCardSegue(_ sender: Any) {
-        performSegue(withIdentifier: "menuToNewCardMenu", sender: nil)
+        performSegue(withIdentifier: "menuToPhoto", sender: nil)
         //let controller = self.storyboard!.instantiateViewController(withIdentifier: "NewCardMenuViewController") as UIViewController
         //self.present(controller, animated: true, completion: nil)
         //}
