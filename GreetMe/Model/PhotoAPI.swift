@@ -75,11 +75,7 @@ class PhotoAPI {
                 // Create JSONDecoder instance and invoke decode function, passing in type of value to decode from the supplied JSON object and the JSON object to decode
                 let pics = try JSONDecoder().decode(PicResponse.self, from: data!)
                     print("Valid Response")
-                    //print(pics)
                     print("------------")
-                    //print(pics)
-                    print("----------")
-                    
                     DispatchQueue.main.async {
                         completionHandler(pics.results, nil)
                    }
@@ -96,20 +92,4 @@ class PhotoAPI {
        task.resume()
 }
 
-
-
-//UnsplashPhotoPickerConfiguration(accessKey: String,
-                                 //secretKey: String,
-                                 //query: String,
-                                 //allowsMultipleSelection: Bool,
-                                 //memoryCapacity: Int,
-                                 //diskCapacity: Int)
-
-// Recommended to present modally or as popover
-//protocol UnsplashPhotoPickerDelegate: class {
-
-  //  func unsplashPhotoPicker(_ photoPicker: UnsplashPhotoPicker, didSelectPhotos photos: [UnsplashPhoto])
-
-  //func unsplashPhotoPickerDidCancel(_ photoPicker: UnsplashPhotoPicker)
-//}
 }

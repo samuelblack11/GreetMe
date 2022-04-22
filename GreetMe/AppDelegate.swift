@@ -12,9 +12,15 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var lastSegue: String = ""
-    
+    var lastPhotoButtonPressed: Int!
     var unsplashSmallPhotoURLs: [String] = [""]
     var unsplashSmallPhotos: [UIImage] = []
+    var photo1: UIImage!
+    var photo2: UIImage!
+    var photo3: UIImage!
+    var photo4: UIImage!
+    var chosenUnsplashImage: UIImage!
+
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

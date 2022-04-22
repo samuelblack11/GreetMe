@@ -18,8 +18,6 @@ class UnsplashCollectionViewController: UICollectionViewController {
     var searchText: String!
     var picCount: Int!
     var chosenImage: UIImage!
-
-    // appDelegate.unsplashSmallPhotoURLs
     
     var appDelegate: AppDelegate {
      return UIApplication.shared.delegate as! AppDelegate
@@ -27,22 +25,38 @@ class UnsplashCollectionViewController: UICollectionViewController {
     
     
     override func viewDidLoad() {
-        //loadUnsplashPhotos()
         super.viewDidLoad()
-        loadUnsplashPhotos()
+        getUnsplashPhotos()
         print("viewDidLoad Called...")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear Called...")
+    }
     
+    
+    func getUnsplashPhotos() {
+        PhotoAPI.getPhoto(userSearch: searchText, completionHandler: { (response, error) in
+            if response != nil {
+                print(self.searchText!)
+                print("# of Elements in Response:.....")
+                self.picCount = response!.count
+                for picture in response! {
+                    if picture.urls.small != nil {
+                        let thisPicture = picture.urls.small
+                        let imageURL = URL(string: thisPicture!)
+                        let thisPhotoData = try? Data(contentsOf: imageURL!)
+                        let unsplashImage = UIImage(data: thisPhotoData!)!
+                        self.unsplashSmallPhotos.append(unsplashImage)
+                    }}}
+            self.loadUnsplashPhotos()
+        })}
+
     func loadUnsplashPhotos() {
-        // indexPath: IndexPath
         unsplashCollectionView.reloadData()
         DispatchQueue.main.async {
         self.collectionView.reloadData()
         }
-        //DispatchQueue.main.async {
-        //    self.collectionView.reloadItems(at: [indexPath])
-        //}
     }
     
     //https://samwize.com/2015/11/30/understanding-uicollection-flow-layout/
@@ -64,36 +78,21 @@ class UnsplashCollectionViewController: UICollectionViewController {
         cell.layer.borderColor = UIColor.systemBlue.cgColor
         cell.layer.borderWidth = 0.5
         
-        PhotoAPI.getPhoto(userSearch: searchText, completionHandler: { (response, error) in
-            if response != nil {
-                print(self.searchText!)
-                print("# of Elements in Response:.....")
-                //print(response?.count)
-                print((response!.count))
-                self.picCount = response!.count
-                print(self.picCount!)
-                //DispatchQueue.main.async {
-                    if response![(indexPath as NSIndexPath).row].urls.small != nil {
-                        var thisPicture = response![(indexPath as NSIndexPath).row].urls.small
-                        let imageURL = URL(string: thisPicture!)
-                        print(imageURL)
-                        let thisPhotoData = try? Data(contentsOf: imageURL!)
-                        print(thisPhotoData)
-                        let unsplashImage = UIImage(data: thisPhotoData!)!
-                        cell.unsplashImage.image = unsplashImage
-                        cell.unsplashImage.contentMode = UIView.ContentMode.scaleAspectFill
-                    }
-            }
-        })
+        let image = unsplashSmallPhotos[(indexPath as NSIndexPath).row]
+        cell.unsplashImage.image = image
+        cell.unsplashImage.contentMode = UIView.ContentMode.scaleAspectFill
+
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        chosenImage = unsplashSmallPhotos[(indexPath as NSIndexPath).row]
         self.performSegue(withIdentifier: "unsplashToImport", sender: nil)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            10
+        unsplashSmallPhotos.count
         }
     
     
@@ -102,9 +101,11 @@ class UnsplashCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "unsplashToImport" {
+            appDelegate.lastSegue  = "unsplashToImport"
             let controller = segue.destination as! ImportPhotoViewController
             print("controller.searchText = searchText")
             controller.chosenUnsplashImage = chosenImage
+            appDelegate.chosenUnsplashImage = chosenImage
             }
     }
     
