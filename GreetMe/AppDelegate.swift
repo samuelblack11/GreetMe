@@ -15,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var lastPhotoButtonPressed: Int!
     var unsplashSmallPhotoURLs: [String] = [""]
     var unsplashSmallPhotos: [UIImage] = []
-    var photo1: UIImage!
-    var photo2: UIImage!
-    var photo3: UIImage!
-    var photo4: UIImage!
+    var photo1: UIImage = UIImage(named: "Olive Groves.png")!
+    var photo2: UIImage = UIImage(named: "Sunflowers.png")!
+    var photo3: UIImage = UIImage(named: "Tulip Fields Near The Hague.png")!
+    var photo4: UIImage = UIImage(named: "Carafe and Dish With Citrus Fruit.png")!
     var chosenUnsplashImage: UIImage!
 
 

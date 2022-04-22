@@ -43,9 +43,8 @@ class PhotoAPI {
         //class func getPhoto(randomSearch: String) {
         // https://cocoacasts.com/networking-fundamentals-how-to-make-an-http-request-in-swift
         let pageNumber = Int.random(in: 0...5)
-        let apiKey = "GXA9JqJgKZiIkvWmnKVuzq1wWNPUN7GiVDHOTiq7f3A"
+        //let apiKey = "GXA9JqJgKZiIkvWmnKVuzq1wWNPUN7GiVDHOTiq7f3A"
         // Define url for the remote image, using the endpoint parameter
-        let user_search = "baklava"
         //let url = URL(string: "https://api.unsplash.com/search/photos?query=\(user_search)/?client_id=\(apiKey)")!
         let url = Endpoints.searchedWords(page_num: pageNumber, userSearch: userSearch).url
         // the request variables includes information the url session needs to perform the HTTP request

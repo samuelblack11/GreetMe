@@ -65,10 +65,10 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     
     
     func savePhotosToAppDelegate() {
-        self.appDelegate.photo1 = self.photo1Preview.image
-        self.appDelegate.photo2 = self.photo2Preview.image
-        self.appDelegate.photo3 = self.photo3Preview.image
-        self.appDelegate.photo4 = self.photo4Preview.image
+        self.appDelegate.photo1 = self.photo1Preview.image!
+        self.appDelegate.photo2 = self.photo2Preview.image!
+        self.appDelegate.photo3 = self.photo3Preview.image!
+        self.appDelegate.photo4 = self.photo4Preview.image!
         
     }
     
@@ -149,8 +149,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             appDelegate.chosenUnsplashImage = nil
         }
         savePhotosToAppDelegate()
-        print("App Delegate Last Photo Button Pressed.....")
-        print(appDelegate.lastPhotoButtonPressed)
     }
     
     

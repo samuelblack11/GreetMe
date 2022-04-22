@@ -134,7 +134,7 @@ class PriorCardsViewController: UIViewController, UICollectionViewDelegate, UICo
    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //View In Detail
         // if tap.....
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
         print("Did Select ItemAt")
         card = cards[(indexPath as NSIndexPath).row]
        
@@ -143,7 +143,7 @@ class PriorCardsViewController: UIViewController, UICollectionViewDelegate, UICo
     // https://developer.apple.com/documentation/uikit/uicontrol/adding_context_menus_in_your_app
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cardCell", for: indexPath) as! PriorCardCell
         self.card = self.cards[(indexPath as NSIndexPath).row]
         print("display context menu")
         
