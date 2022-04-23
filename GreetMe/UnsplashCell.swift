@@ -14,5 +14,6 @@ class UnsplashCell: UICollectionViewCell {
     
     @IBOutlet weak var unsplashImage: UIImageView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
 }

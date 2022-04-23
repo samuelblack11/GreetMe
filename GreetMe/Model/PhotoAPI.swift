@@ -73,6 +73,11 @@ class PhotoAPI {
             do {
                 // Create JSONDecoder instance and invoke decode function, passing in type of value to decode from the supplied JSON object and the JSON object to decode
                 let pics = try JSONDecoder().decode(PicResponse.self, from: data!)
+                    print("------------")
+                    print(pics.results.count)
+                if pics.results.count == 0 {
+                    print("No results for that search......")
+                }
                     print("Valid Response")
                     print("------------")
                     DispatchQueue.main.async {

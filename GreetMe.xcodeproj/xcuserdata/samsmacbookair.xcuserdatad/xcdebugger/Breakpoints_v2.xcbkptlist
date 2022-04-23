@@ -36,5 +36,98 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A20C4C1B-790A-44B0-881D-009378E6904A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GreetMe/UnsplashCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "A20C4C1B-790A-44B0-881D-009378E6904A - f7ebe7edcef49bb5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GreetMe.UnsplashCell.__allocating_init(frame: __C.CGRect) -&gt; GreetMe.UnsplashCell"
+                  moduleName = "GreetMe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/samsmacbookair/Desktop/iOS%20Developer/Unit%206%20(Final%20Project)/GreetMe/GreetMe/UnsplashCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  uuid = "A20C4C1B-790A-44B0-881D-009378E6904A - 6c5ece34bd5b7b7c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GreetMe.UnsplashCell.init(frame: __C.CGRect) -&gt; GreetMe.UnsplashCell"
+                  moduleName = "GreetMe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/samsmacbookair/Desktop/iOS%20Developer/Unit%206%20(Final%20Project)/GreetMe/GreetMe/UnsplashCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "113">
+               </Location>
+               <Location
+                  uuid = "A20C4C1B-790A-44B0-881D-009378E6904A - a1ecafc7078c37a6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GreetMe.UnsplashCell.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;GreetMe.UnsplashCell&gt;"
+                  moduleName = "GreetMe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/samsmacbookair/Desktop/iOS%20Developer/Unit%206%20(Final%20Project)/GreetMe/GreetMe/UnsplashCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  uuid = "A20C4C1B-790A-44B0-881D-009378E6904A - c4d2f2970eb51078"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GreetMe.UnsplashCell.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;GreetMe.UnsplashCell&gt;"
+                  moduleName = "GreetMe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/samsmacbookair/Desktop/iOS%20Developer/Unit%206%20(Final%20Project)/GreetMe/GreetMe/UnsplashCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "74">
+               </Location>
+               <Location
+                  uuid = "A20C4C1B-790A-44B0-881D-009378E6904A - 86e0027ca0afa4ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GreetMe.UnsplashCell.__deallocating_deinit"
+                  moduleName = "GreetMe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/samsmacbookair/Desktop/iOS%20Developer/Unit%206%20(Final%20Project)/GreetMe/GreetMe/UnsplashCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
