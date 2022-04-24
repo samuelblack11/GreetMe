@@ -18,6 +18,7 @@
 		2651CAEC27FA05EB00AB18A9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2651CAEB27FA05EB00AB18A9 /* DataController.swift */; };
 		268A550527F66CEE00E10139 /* PriorCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268A550427F66CEE00E10139 /* PriorCardsViewController.swift */; };
 		2692BEDF280E45A100CBDD95 /* UnsplashCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2692BEDE280E45A100CBDD95 /* UnsplashCell.swift */; };
+		26B24E8F28160D12000E65EC /* PingDownloadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B24E8E28160D12000E65EC /* PingDownloadResponse.swift */; };
 		26BD35E827F4FDD800DE4793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD35E727F4FDD800DE4793 /* AppDelegate.swift */; };
 		26BD35EA27F4FDD800DE4793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD35E927F4FDD800DE4793 /* SceneDelegate.swift */; };
 		26BD35EC27F4FDD800DE4793 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD35EB27F4FDD800DE4793 /* LoginViewController.swift */; };
@@ -46,6 +47,7 @@
 		2651CAEB27FA05EB00AB18A9 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		268A550427F66CEE00E10139 /* PriorCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorCardsViewController.swift; sourceTree = "<group>"; };
 		2692BEDE280E45A100CBDD95 /* UnsplashCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashCell.swift; sourceTree = "<group>"; };
+		26B24E8E28160D12000E65EC /* PingDownloadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingDownloadResponse.swift; sourceTree = "<group>"; };
 		26BD35E427F4FDD800DE4793 /* GreetMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GreetMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26BD35E727F4FDD800DE4793 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26BD35E927F4FDD800DE4793 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				2692BEDE280E45A100CBDD95 /* UnsplashCell.swift */,
 				26015A7A280C89CD00A3A7DC /* UnsplashCollectionViewController.swift */,
 				2612AA19280AF2BB00110C43 /* UnsplashResponse.swift */,
+				26B24E8E28160D12000E65EC /* PingDownloadResponse.swift */,
 				2612AA1B280AF2E000110C43 /* UnsplashResponseTags.swift */,
 				26CA772127F8D07200D91849 /* View Controllers */,
 				26BD35F327F4FDDB00DE4793 /* Assets.xcassets */,
@@ -242,6 +245,7 @@
 				2692BEDF280E45A100CBDD95 /* UnsplashCell.swift in Sources */,
 				260303DC2801DCB9006ACEEB /* Card+CoreDataClass.swift in Sources */,
 				26CA775027F8E45F00D91849 /* CustomVisualViewController.swift in Sources */,
+				26B24E8F28160D12000E65EC /* PingDownloadResponse.swift in Sources */,
 				268A550527F66CEE00E10139 /* PriorCardsViewController.swift in Sources */,
 				2651CAEC27FA05EB00AB18A9 /* DataController.swift in Sources */,
 				26BD35E827F4FDD800DE4793 /* AppDelegate.swift in Sources */,

@@ -76,8 +76,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         if searchBar.text != nil {
             searchBarText = searchBar.text?.replacingOccurrences(of: " ", with: "-")
             searchText = searchBarText
-            print("-------")
-            print(searchText!)
             performSegue(withIdentifier: "importToUnsplash", sender: nil)
         }
         
@@ -239,7 +237,6 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             }
 
             if lastButtonPressed == 4 {
-            print("Last BUtton pressed was #4 in imagePickerController")
             photo4Preview.image = image
             imageFill(imageView: photo4Preview)
             appDelegate.attribution4 = attribution4
@@ -268,10 +265,7 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             savePhotosToAppDelegate()
             appDelegate.lastSegue = "importToUnsplash"
             let controller = segue.destination as! UnsplashCollectionViewController
-            print("controller.searchText = searchText")
             controller.searchText = searchText
-
-                
             }
     }
     

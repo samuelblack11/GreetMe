@@ -20,17 +20,19 @@ class PhotoAPI {
     static let apiKey = "GXA9JqJgKZiIkvWmnKVuzq1wWNPUN7GiVDHOTiq7f3A"
     static let secretKey = "DKnRQDO4TVGHcmhJVAcgq1VoMpFzvuoMVzql9kvkCmI"
     static let baseURL = "https://api.unsplash.com/search/photos?"
+    static let downloadURL = "https://api.unsplash.com/photos?/"
     case searchedWords(page_num: Int, userSearch: String)
-    case random(randomSearch: String)
+    case pingDownloadForTrigger(photoID: String)
 
     var URLString: String{
         switch self {
             case .searchedWords(let page_num, let userSearch ):
             return Endpoints.baseURL + "page=\(page_num)&query=\(userSearch)&client_id=\(PhotoAPI.Endpoints.apiKey)"
-        case .random(_):
-                return Endpoints.baseURL + ""
+        case .pingDownloadForTrigger(let photoID):
+                return Endpoints.downloadURL + "\(photoID)" + "/download&client_id=\(PhotoAPI.Endpoints.apiKey)"
             }
         }
+    //print(URLString)
     var url: URL{ return URL(string: URLString)!}
     }
     
@@ -73,8 +75,6 @@ class PhotoAPI {
             do {
                 // Create JSONDecoder instance and invoke decode function, passing in type of value to decode from the supplied JSON object and the JSON object to decode
                 let pics = try JSONDecoder().decode(PicResponse.self, from: data!)
-                    print("------------")
-                    print(pics.results.count)
                 if pics.results.count == 0 {
                     print("No results for that search......")
                 }
@@ -95,5 +95,45 @@ class PhotoAPI {
         // This .resume() line actually executes the URLSessionDataTask
        task.resume()
 }
-
+    
+    
+    
+    class func pingDownloadURL(photoID: String,  completionHandler: @escaping (PingDownloadResponse?,Error?) -> Void) {
+        
+        let urlString = Endpoints.pingDownloadForTrigger(photoID: photoID)
+        print(urlString)
+        let url = urlString.url
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("v1", forHTTPHeaderField: "Accept-Version")
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error)
+            // Completion Handler is Below
+             in
+            print("pingDownloadURL Data Returned.....")
+            print(String(data: data!, encoding: .utf8))
+            if error != nil {
+                DispatchQueue.main.async {
+                    completionHandler(nil, error)
+                }
+                return
+            }
+            do {
+                // Create JSONDecoder instance and invoke decode function, passing in type of value to decode from the supplied JSON object and the JSON object to decode
+                let pingStatus = try JSONDecoder().decode(PingDownloadResponse.self, from: data!)
+                    DispatchQueue.main.async {
+                        completionHandler(pingStatus, nil)
+                   }
+                }
+                catch {
+                    print("Invalid Response")
+                    print("Request failed: \(error)")
+                    DispatchQueue.main.async {
+                        completionHandler(nil, error)
+                    }
+            }
+        })
+        // This .resume() line actually executes the URLSessionDataTask
+       task.resume()
+    }
 }

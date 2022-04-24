@@ -17,18 +17,19 @@ class UnsplashCollectionViewController: UICollectionViewController {
     var unsplashSmallPhotos: [UIImage] = []
     var unsplashuserNames: [String] = []
     var unsplashNames: [String] = []
+    var unsplashDownloadIDs: [String] = []
     var searchText: String!
     var picCount: Int!
     var chosenImage: UIImage!
     var chosenPhotographerUserName: String!
     var chosenPhotographerName: String!
+    var chosenDownloadID: String!
 
     weak var UnsplashCell: UnsplashCell?
     
     var appDelegate: AppDelegate {
      return UIApplication.shared.delegate as! AppDelegate
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,34 +42,22 @@ class UnsplashCollectionViewController: UICollectionViewController {
         print("viewWillAppear Called...")
     }
     
-    
     func getUnsplashPhotos() {
         self.spinIndicator(true)
         PhotoAPI.getPhoto(userSearch: searchText, completionHandler: { (response, error) in
             if response != nil {
-                print(self.searchText!)
-                print("# of Elements in Response:.....")
                 self.picCount = response!.count
                 DispatchQueue.main.async {
-                print(response)
                 for picture in response! {
-                    if picture.urls.small != nil && picture.user.username != nil && picture.user.name != nil {
+                    if picture.urls.small != nil && picture.user.username != nil && picture.user.name != nil && picture.id != nil {
+                        
                         let thisPicture = picture.urls.small
                         self.unsplashSmallPhotoURLs.append(thisPicture!)
-                        print("URL Count:")
-                        print(self.unsplashSmallPhotoURLs.count)
-                        
                         self.unsplashuserNames.append(picture.user.username!)
-                        print("Photographer Name Count:")
-                        print(self.unsplashuserNames.count)
-                        
                         self.unsplashNames.append(picture.user.name!)
-                        print("Profile Link Counts:")
-                        print(self.unsplashNames.count)
+                        self.unsplashDownloadIDs.append(picture.id)
                     }}
-                    print("URL Count:")
-                    print(self.unsplashSmallPhotoURLs.count)
-                    self.collectionView.reloadData()
+
                 }
             }
             if self.picCount == 0 {
@@ -79,8 +68,7 @@ class UnsplashCollectionViewController: UICollectionViewController {
             }
             self.loadUnsplashPhotos()
             self.spinIndicator(false)
-        }
-        )
+        })
     }
 
     func loadUnsplashPhotos() {
@@ -102,7 +90,6 @@ class UnsplashCollectionViewController: UICollectionViewController {
         layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
     }
     
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UnsplashCell", for: indexPath) as! UnsplashCell
         self.spinIndicator(true)
@@ -111,8 +98,6 @@ class UnsplashCollectionViewController: UICollectionViewController {
         cell.layer.borderWidth = 0.5
         //let image = unsplashSmallPhotos[(indexPath as NSIndexPath).row]
         let imageString = unsplashSmallPhotoURLs[(indexPath as NSIndexPath).row]
-        print("Cell #.........")
-        print([(indexPath as NSIndexPath).row])
         DispatchQueue.main.async {
 
             let imageURL = URL(string: imageString)
@@ -132,23 +117,32 @@ class UnsplashCollectionViewController: UICollectionViewController {
         chosenImage = unsplashSmallPhotos[(indexPath as NSIndexPath).row]
         chosenPhotographerUserName = unsplashuserNames[(indexPath as NSIndexPath).row]
         chosenPhotographerName = unsplashNames[(indexPath as NSIndexPath).row]
+        chosenDownloadID = unsplashDownloadIDs[(indexPath as NSIndexPath).row]
         
+        // create Get request to notify Unsplash photo was downloaded
+        PhotoAPI.pingDownloadURL(photoID: chosenDownloadID, completionHandler: { (response, error) in
+            if response != nil {
+                print("Ping Success!.......")
+                print(response)
+            }
+            if response == nil {
+                print("Ping Failed!.......")
+                print(response)
+            }
+        })
         self.performSegue(withIdentifier: "unsplashToImport", sender: nil)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         unsplashSmallPhotoURLs.count
         }
-    
-    
-    
+      
     // https://www.hackingwithswift.com/example-code/system/how-to-pass-data-between-two-view-controllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "unsplashToImport" {
             appDelegate.lastSegue  = "unsplashToImport"
             let controller = segue.destination as! ImportPhotoViewController
-            print("controller.searchText = searchText")
             //controller.chosenUnsplashImage = chosenImage
             appDelegate.chosenUnsplashImage = chosenImage
             appDelegate.chosenPhotographerUserName = chosenPhotographerUserName
@@ -156,7 +150,6 @@ class UnsplashCollectionViewController: UICollectionViewController {
             
             }
     }
-    
     
     func spinIndicator(_ gettingPhotos: Bool) {
         if gettingPhotos {
