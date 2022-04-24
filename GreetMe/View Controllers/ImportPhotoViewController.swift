@@ -25,10 +25,13 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var userSearch: UISearchBar!
     var searchText: String!
     var searchBarText: String!
-    var chosenUnsplashImage: UIImage!
+    //var chosenUnsplashImage: UIImage!
 
-
-
+    @IBOutlet weak var attribution1: UITextView!
+    @IBOutlet weak var attribution2: UITextView!
+    @IBOutlet weak var attribution3: UITextView!
+    @IBOutlet weak var attribution4: UITextView!
+    
     
     // https://www.hackingwithswift.com/read/7/3/parsing-json-using-the-codable-protocol
     var unsplashPhotos: [ResultDetails]!
@@ -60,19 +63,12 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         return menu
     }
     
-    
-    
-    
-    
     func savePhotosToAppDelegate() {
         self.appDelegate.photo1 = self.photo1Preview.image!
         self.appDelegate.photo2 = self.photo2Preview.image!
         self.appDelegate.photo3 = self.photo3Preview.image!
         self.appDelegate.photo4 = self.photo4Preview.image!
-        
     }
-    
-    
     
     // https://guides.codepath.com/ios/Search-Bar-Guide
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -110,16 +106,18 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         imageFill(imageView: photo2Preview)
         imageFill(imageView: photo3Preview)
         imageFill(imageView: photo4Preview)
-
         userSearch.delegate = self
         userSearch.isHidden = true
-
     }
     
     
+    func addAttribution(textView: UITextView) {
+        let text =  NSMutableAttributedString(string: "Photo by \(appDelegate.chosenPhotographerName!) on Unsplash")
+        text.addAttribute(.link, value: "https://unsplash.com/@\(appDelegate.chosenPhotographerUserName!)" , range: NSRange(location: 9, length: appDelegate.chosenPhotographerName!.count))
+        text.addAttribute(.link, value: "https://unsplash.com" , range: NSRange(location: 13 + appDelegate.chosenPhotographerName!.count, length: 8))
+        textView.attributedText = text
+    }
 
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.photo1Preview.image =  self.appDelegate.photo1
@@ -133,25 +131,48 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         imageFill(imageView: photo4Preview)
         
         if appDelegate.chosenUnsplashImage != nil {
+
             if appDelegate.lastPhotoButtonPressed!  == 1 {
                 photo1Preview.image = appDelegate.chosenUnsplashImage!
+                addAttribution(textView: attribution1)
+                appDelegate.attribution1 = attribution1
+
             }
-            if appDelegate.lastPhotoButtonPressed!  == 2 {
+            else if appDelegate.lastPhotoButtonPressed!  == 2 {
                 photo2Preview.image = appDelegate.chosenUnsplashImage!
+                addAttribution(textView: attribution2)
+                appDelegate.attribution2 = attribution2
             }
-            if appDelegate.lastPhotoButtonPressed!  == 3 {
+            else if appDelegate.lastPhotoButtonPressed!  == 3 {
                 photo3Preview.image = appDelegate.chosenUnsplashImage!
+                addAttribution(textView: attribution3)
+                appDelegate.attribution3 = attribution3
             }
-            if appDelegate.lastPhotoButtonPressed!  == 4 {
+            else if appDelegate.lastPhotoButtonPressed!  == 4 {
                 photo4Preview.image = appDelegate.chosenUnsplashImage!
+                addAttribution(textView: attribution4)
+                appDelegate.attribution4 = attribution4
             }
+            
             appDelegate.lastPhotoButtonPressed = 0
             appDelegate.chosenUnsplashImage = nil
         }
+
+        if appDelegate.attribution1 != nil {
+            attribution1.attributedText = appDelegate.attribution1.attributedText
+        }
+        if appDelegate.attribution2 != nil {
+            attribution2.attributedText = appDelegate.attribution2.attributedText
+        }
+        if appDelegate.attribution3 != nil {
+            attribution3.attributedText = appDelegate.attribution3.attributedText
+        }
+        if appDelegate.attribution4 != nil {
+            attribution4.attributedText = appDelegate.attribution4.attributedText
+        }
+
         savePhotosToAppDelegate()
     }
-    
-    
     
     @IBAction func selectPhoto1(_ sender: Any) {
         lastButtonPressed = 1
@@ -198,22 +219,31 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
             if lastButtonPressed == 1 {
             photo1Preview.image = image
             imageFill(imageView: photo1Preview)
+            appDelegate.attribution1 = attribution1
+            attribution1.text = ""
             }
             
             if lastButtonPressed == 2 {
             photo2Preview.image = image
             imageFill(imageView: photo2Preview)
+            appDelegate.attribution2 = attribution2
+            attribution2.text = ""
+
             }
             
             if lastButtonPressed == 3 {
             photo3Preview.image = image
             imageFill(imageView: photo3Preview)
+            appDelegate.attribution3 = attribution3
+            attribution3.text = ""
             }
 
             if lastButtonPressed == 4 {
             print("Last BUtton pressed was #4 in imagePickerController")
             photo4Preview.image = image
             imageFill(imageView: photo4Preview)
+            appDelegate.attribution4 = attribution4
+            attribution4.text = ""
             }
         }
         dismiss(animated: true, completion: nil)

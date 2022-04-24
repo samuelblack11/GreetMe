@@ -187,8 +187,7 @@ class FinalizeCardViewController: UIViewController {
     
     
     @IBAction func clickMenuButton(_ sender: Any) {
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MenuViewController") as UIViewController
-        self.present(controller, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "finalizeToMenu", sender: nil)
     }
     
     

@@ -20,7 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var photo3: UIImage = UIImage(named: "Tulip Fields Near The Hague.png")!
     var photo4: UIImage = UIImage(named: "Carafe and Dish With Citrus Fruit.png")!
     var chosenUnsplashImage: UIImage!
-
+    var chosenPhotographerUserName: String!
+    var chosenPhotographerName: String!
+    
+    var attribution1: UITextView!
+    var attribution2: UITextView!
+    var attribution3: UITextView!
+    var attribution4: UITextView!
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
