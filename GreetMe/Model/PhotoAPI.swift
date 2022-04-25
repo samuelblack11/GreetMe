@@ -22,14 +22,14 @@ class PhotoAPI {
     static let baseURL = "https://api.unsplash.com/search/photos?"
     static let downloadURL = "https://api.unsplash.com/photos?/"
     case searchedWords(page_num: Int, userSearch: String)
-    case pingDownloadForTrigger(photoID: String)
+    case pingDownloadForTrigger(downloadLocation: String)
 
     var URLString: String{
         switch self {
             case .searchedWords(let page_num, let userSearch ):
             return Endpoints.baseURL + "page=\(page_num)&query=\(userSearch)&client_id=\(PhotoAPI.Endpoints.apiKey)"
-        case .pingDownloadForTrigger(let photoID):
-                return Endpoints.downloadURL + "\(photoID)" + "/download&client_id=\(PhotoAPI.Endpoints.apiKey)"
+        case .pingDownloadForTrigger(let downloadLocation):
+                return downloadLocation + "&client_id=\(PhotoAPI.Endpoints.apiKey)"
             }
         }
     //print(URLString)
@@ -98,9 +98,9 @@ class PhotoAPI {
     
     
     
-    class func pingDownloadURL(photoID: String,  completionHandler: @escaping (PingDownloadResponse?,Error?) -> Void) {
+    class func pingDownloadURL(downloadLocation: String,  completionHandler: @escaping (PingDownloadResponse?,Error?) -> Void) {
         
-        let urlString = Endpoints.pingDownloadForTrigger(photoID: photoID)
+        let urlString = Endpoints.pingDownloadForTrigger(downloadLocation: downloadLocation)
         print(urlString)
         let url = urlString.url
         var request = URLRequest(url: url)

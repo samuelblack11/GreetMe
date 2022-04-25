@@ -17,13 +17,13 @@ class UnsplashCollectionViewController: UICollectionViewController {
     var unsplashSmallPhotos: [UIImage] = []
     var unsplashuserNames: [String] = []
     var unsplashNames: [String] = []
-    var unsplashDownloadIDs: [String] = []
+    var unsplashDownloadLocations: [String] = []
     var searchText: String!
     var picCount: Int!
     var chosenImage: UIImage!
     var chosenPhotographerUserName: String!
     var chosenPhotographerName: String!
-    var chosenDownloadID: String!
+    var chosenDownloadLocation: String!
 
     weak var UnsplashCell: UnsplashCell?
     
@@ -49,13 +49,14 @@ class UnsplashCollectionViewController: UICollectionViewController {
                 self.picCount = response!.count
                 DispatchQueue.main.async {
                 for picture in response! {
-                    if picture.urls.small != nil && picture.user.username != nil && picture.user.name != nil && picture.id != nil {
-                        
+                    if picture.urls.small != nil && picture.user.username != nil && picture.user.name != nil && picture.links.download_location != nil {
+                        print("Picture Object......")
+                        print(picture)
                         let thisPicture = picture.urls.small
                         self.unsplashSmallPhotoURLs.append(thisPicture!)
                         self.unsplashuserNames.append(picture.user.username!)
                         self.unsplashNames.append(picture.user.name!)
-                        self.unsplashDownloadIDs.append(picture.id)
+                        self.unsplashDownloadLocations.append(picture.links.download_location!)
                     }}
 
                 }
@@ -117,10 +118,10 @@ class UnsplashCollectionViewController: UICollectionViewController {
         chosenImage = unsplashSmallPhotos[(indexPath as NSIndexPath).row]
         chosenPhotographerUserName = unsplashuserNames[(indexPath as NSIndexPath).row]
         chosenPhotographerName = unsplashNames[(indexPath as NSIndexPath).row]
-        chosenDownloadID = unsplashDownloadIDs[(indexPath as NSIndexPath).row]
+        chosenDownloadLocation = unsplashDownloadLocations[(indexPath as NSIndexPath).row]
         
         // create Get request to notify Unsplash photo was downloaded
-        PhotoAPI.pingDownloadURL(photoID: chosenDownloadID, completionHandler: { (response, error) in
+        PhotoAPI.pingDownloadURL(downloadLocation: chosenDownloadLocation, completionHandler: { (response, error) in
             if response != nil {
                 print("Ping Success!.......")
                 print(response)

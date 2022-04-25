@@ -106,6 +106,7 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         imageFill(imageView: photo4Preview)
         userSearch.delegate = self
         userSearch.isHidden = true
+        
     }
     
     
