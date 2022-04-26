@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import CoreData
+import Network
+import SystemConfiguration
 
 class ImportPhotoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UISearchBarDelegate {
     
@@ -46,20 +48,56 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         self.performSegue(withIdentifier: "photoToNote", sender: nil)
     }
     
+    // https://www.hackingwithswift.com/example-code/networking/how-to-check-for-internet-connectivity-using-nwpathmonitor
+    func connectedToInternet() -> Bool {
+        var connected = false
+        let monitor = NWPathMonitor()
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+        monitor.pathUpdateHandler = { path in
+            print("***********")
+            print(path.status)
+            if path.status == .satisfied {
+                print("Set Connected = True")
+                connected = true  // online
+                //return connected
+                print("Connected Status in Closure.....")
+                print(connected)
+            }
+        }
+        print("Now Outisde Closure.........")
+        print(monitor)
+        print(connected)
+
+        print("Return value for Connected: \(connected)")
+        return connected
+    }
+    
+    
+
     // https://medium.nextlevelswift.com/creating-a-native-popup-menu-over-a-uibutton-or-uinavigationbar-645edf0329c4
     func createSubMenu() -> UIMenu {
+        
         let photoLibraryItem =  UIAction(title: "Photo Library", image: UIImage(systemName: "photo.on.rectangle")) { (action) in
             self.selectPhoto()
        }
-        
-        let searchAPIForphotoItem = UIAction(title: "Search The Web", image: UIImage(systemName: "magnifyingglass")) { (action) in
-            // show search bar
-            self.savePhotosToAppDelegate()
-            self.userSearch.isHidden = false
-            // Get photos based on user entry
+        var searchForPhotoAPI: UIAction!
+        if connectedToInternet() {
+            print("Set Search for Photo API ENABLED")
+            searchForPhotoAPI = UIAction(title: "Search The Web", image: UIImage(systemName: "magnifyingglass")) { (action) in
+                        self.savePhotosToAppDelegate()
+                        self.userSearch.isHidden = false
+            }
         }
-        
-        let menu = UIMenu(title: "Choose a Photo Selection Method", options: .displayInline, children: [photoLibraryItem, searchAPIForphotoItem])
+        else {
+            print("Set Search for Photo API DISABLED")
+            searchForPhotoAPI = UIAction(title: "Search The Web", image: UIImage(systemName: "magnifyingglass"),attributes: .disabled) { (action) in
+                        self.savePhotosToAppDelegate()
+                        self.userSearch.isHidden = false
+            }
+        }
+    
+        let menu =  UIMenu(title: "Choose a Photo Selection Method", options: .displayInline, children: [photoLibraryItem, searchForPhotoAPI])
         return menu
     }
     
@@ -71,18 +109,18 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
     }
     
     // https://guides.codepath.com/ios/Search-Bar-Guide
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.isHidden = false
-        if searchBar.text != nil {
-            searchBarText = searchBar.text?.replacingOccurrences(of: " ", with: "-")
-            searchText = searchBarText
-            performSegue(withIdentifier: "importToUnsplash", sender: nil)
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.isHidden = false
+            if searchBar.text != nil {
+                searchBarText = searchBar.text?.replacingOccurrences(of: " ", with: "-")
+                searchText = searchBarText
+                performSegue(withIdentifier: "importToUnsplash", sender: nil)
+            }
+            
+            else if searchBar.text == nil {
+                sendAlert(title: "Please Type a Value To Search", message: "this field is required in order to search")
+            }
         }
-        
-        else if searchBar.text == nil {
-            sendAlert(title: "Please Type a Value To Search", message: "this field is required in order to search")
-        }
-    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
@@ -280,16 +318,21 @@ class ImportPhotoViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     
+
+}
+extension ImportPhotoViewController {
+    
     func sendAlert(title: String, message: String) {
     // https://stackoverflow.com/questions/24195310/how-to-add-an-action-to-a-uialertview-button-using-swift-ios
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
         let dismissAction = UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default) {
                 UIAlertAction in NSLog("Dismiss Pressed")
+            self.navigationController?.popViewController(animated: true)
         }
             
         alertController.addAction(dismissAction)
         self.present(alertController,animated: true, completion: nil)
     }
-
+    
 }

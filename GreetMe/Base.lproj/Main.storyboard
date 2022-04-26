@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hJV-Qf-jLd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -16,7 +16,6 @@
                 <navigationController id="1z3-Vi-cLg" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="kqU-t1-A4G"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vNB-bX-FTr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -96,7 +95,7 @@
             <objects>
                 <viewController storyboardIdentifier="MenuViewController" id="hJV-Qf-jLd" customClass="MenuViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e5i-sn-Ikv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="green-chameleon-s9CC2SKySJM-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="IKp-oI-Huu" userLabel="createNewImage">
@@ -194,7 +193,7 @@
             <objects>
                 <collectionViewController restorationIdentifier="UnsplashCollectionViewController" storyboardIdentifier="UnsplashCollectionViewController" id="BGn-a1-gG9" userLabel="UnsplashCollectionViewController" customClass="UnsplashCollectionViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="unsplashCollectionView" dataMode="prototypes" id="44c-Nn-WJs" userLabel="unsplashCollectionView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="O3s-C0-AQ6">
@@ -266,7 +265,7 @@
             <objects>
                 <viewController restorationIdentifier="ImportPhotoViewController" storyboardIdentifier="ImportPhotoViewController" id="zMw-sT-llV" userLabel="ImportPhotoViewController" customClass="ImportPhotoViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WA4-e7-k3k">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEa-tH-3xK" userLabel="photo1Button">
@@ -523,11 +522,11 @@
             <objects>
                 <viewController restorationIdentifier="PriorCardsViewController" storyboardIdentifier="PriorCardsViewController" id="KGC-yE-FOP" userLabel="PriorCardsViewController" customClass="PriorCardsViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xzc-H7-Yfg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="collectionView" dataMode="prototypes" id="Da0-qs-UlJ" userLabel="collectionView">
-                                <rect key="frame" x="20" y="124" width="374" height="684"/>
+                                <rect key="frame" x="20" y="124" width="374" height="738"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pif-s8-pXa" userLabel="collectionViewLayout">
@@ -617,7 +616,7 @@
             <objects>
                 <viewController restorationIdentifier="WriteNoteViewController" storyboardIdentifier="WriteNoteViewController" id="vco-ZT-wgu" userLabel="WriteNoteViewController" customClass="WriteNoteViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y3L-Lb-Sdb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MQg-yT-lC6">
@@ -721,7 +720,7 @@
             <objects>
                 <viewController restorationIdentifier="FinalizeCardViewController" storyboardIdentifier="FinalizeCardViewController" title="FinalizeCardViewController" id="wNo-65-Jk0" userLabel="FinalizeCardViewController" customClass="FinalizeCardViewController" customModule="GreetMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z2q-lp-dti">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" axis="vertical" distribution="equalSpacing" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="0Vm-9G-8xh" userLabel="cardStack">
@@ -822,7 +821,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="gJz-r8-AEG"/>
-        <segue reference="sQT-Nk-Ynp"/>
+        <segue reference="dSx-mc-u1d"/>
         <segue reference="b0s-La-TBr"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -830,13 +829,13 @@
         <image name="Olive Groves" width="533" height="415"/>
         <image name="Sunflowers" width="315" height="418"/>
         <image name="Wheatfield with a Reaper" width="529" height="417"/>
-        <image name="arrow.down.doc.fill" catalog="system" width="115" height="128"/>
-        <image name="checkmark.seal.fill" catalog="system" width="128" height="128"/>
+        <image name="arrow.down.doc.fill" catalog="system" width="32" height="32"/>
+        <image name="checkmark.seal.fill" catalog="system" width="32" height="32"/>
         <image name="green-chameleon-s9CC2SKySJM-unsplash" width="5184" height="3456"/>
-        <image name="greetingcard.fill" catalog="system" width="106" height="128"/>
-        <image name="menucard.fill" catalog="system" width="106" height="128"/>
+        <image name="greetingcard.fill" catalog="system" width="32" height="32"/>
+        <image name="menucard.fill" catalog="system" width="32" height="32"/>
         <image name="ranurte-VPTSnznXtyQ-unsplash" width="2818" height="3739"/>
-        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
+        <image name="square.and.arrow.up.fill" catalog="system" width="32" height="32"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -46,20 +46,6 @@ class UnsplashCollectionViewController: UICollectionViewController {
     
     func getUnsplashPhotos() {
         self.spinIndicator(true)
-        let monitor = NWPathMonitor()
-        monitor.pathUpdateHandler = { path in
-            if path.status == .satisfied {
-                print("Connected")
-            } else {
-                self.spinIndicator(true)
-                WriteNoteViewController().sendAlert(title: "Unable to Connect to Internet", message: "Please try again later.")
-                print("Not Connected")
-            }
-            //print(path.isExpensive)
-        }
-        let queue = DispatchQueue(label: "Monitor")
-        monitor.start(queue: queue)
-        
         PhotoAPI.getPhoto(userSearch: searchText, completionHandler: { (response, error) in
             if response != nil {
                 self.picCount = response!.count
@@ -78,11 +64,11 @@ class UnsplashCollectionViewController: UICollectionViewController {
                 }
             }
             if self.picCount == 0 {
-                WriteNoteViewController().sendAlert(title: "No Results for your Search", message: "Please search for something else.")
+                UnsplashCollectionViewController().sendAlert(title: "No Results for your Search", message: "Please search for something else.")
             }
             if response == nil {
                 self.spinIndicator(true)
-                WriteNoteViewController().sendAlert(title: "Unable to Connect to Internet", message: "Please try again later.")
+                UnsplashCollectionViewController().sendAlert(title: "Unable to Connect to Internet", message: "Please try again later.")
             }
             self.loadUnsplashPhotos()
             self.spinIndicator(false)
