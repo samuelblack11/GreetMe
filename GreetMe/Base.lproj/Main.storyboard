@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="activityIndicator" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bnQ-ad-S8Q" userLabel="activityIndicator">
-                                <rect key="frame" x="182" y="681" width="50" height="50"/>
+                                <rect key="frame" x="182" y="662" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="FQD-U3-1iw"/>
                                     <constraint firstAttribute="height" constant="50" id="wqT-6P-qPi"/>
@@ -50,17 +50,6 @@
                                     <constraint firstAttribute="height" constant="75" id="iO9-1G-ag3"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhn-ZF-tHX">
-                                <rect key="frame" x="123.5" y="781" width="167" height="31"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <accessibility key="accessibilityConfiguration" identifier="signInButton" label="signInButton"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="applelogo" catalog="system" title="  Sign In With Apple"/>
-                                <connections>
-                                    <action selector="loginFunction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HqP-MX-ysK"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GreetMe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Byg-WC-DFt">
                                 <rect key="frame" x="150.5" y="44" width="113" height="50"/>
                                 <constraints>
@@ -69,31 +58,38 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mMC-nR-7QA">
+                                <rect key="frame" x="82" y="762" width="250" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="EhG-Cb-G9c"/>
+                                    <constraint firstAttribute="width" constant="250" id="s7u-hz-yqS"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="mMC-nR-7QA" firstAttribute="top" secondItem="bnQ-ad-S8Q" secondAttribute="bottom" constant="50" id="0OG-J0-2Jk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mMC-nR-7QA" secondAttribute="bottom" constant="50" id="EIw-ez-WtP"/>
                             <constraint firstItem="Byg-WC-DFt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MSJ-uk-yu5"/>
-                            <constraint firstItem="nhn-ZF-tHX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OT8-j0-d3k"/>
                             <constraint firstItem="Ai0-3r-n3v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rxv-dC-dUI"/>
                             <constraint firstItem="bnQ-ad-S8Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="W41-Yy-rfh"/>
                             <constraint firstItem="Ai0-3r-n3v" firstAttribute="top" secondItem="Byg-WC-DFt" secondAttribute="bottom" id="Y8k-0b-Vb5"/>
                             <constraint firstItem="Byg-WC-DFt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YUn-PJ-Ho8"/>
-                            <constraint firstItem="nhn-ZF-tHX" firstAttribute="top" secondItem="bnQ-ad-S8Q" secondAttribute="bottom" constant="50" id="eIC-dS-jD3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nhn-ZF-tHX" secondAttribute="bottom" constant="50" id="qh0-G2-PfQ"/>
+                            <constraint firstItem="mMC-nR-7QA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xSY-Pd-uSv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T9d-j8-VMa"/>
                     <connections>
                         <outlet property="activityIndicator" destination="bnQ-ad-S8Q" id="1df-qL-SK7"/>
                         <outlet property="greetingLogo" destination="Ai0-3r-n3v" id="SWZ-HN-0Oz"/>
-                        <outlet property="signInButton" destination="nhn-ZF-tHX" id="f5h-Ka-1jJ"/>
+                        <outlet property="stackView" destination="mMC-nR-7QA" id="fJ8-gd-4aY"/>
                         <segue destination="1z3-Vi-cLg" kind="show" identifier="loginToNav" id="Bid-3W-vDZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-930" y="-192"/>
+            <point key="canvasLocation" x="-930.43478260869574" y="-192.1875"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="fs9-HA-i91">
@@ -834,7 +830,6 @@
         <image name="Olive Groves" width="533" height="415"/>
         <image name="Sunflowers" width="315" height="418"/>
         <image name="Wheatfield with a Reaper" width="529" height="417"/>
-        <image name="applelogo" catalog="system" width="103" height="128"/>
         <image name="arrow.down.doc.fill" catalog="system" width="115" height="128"/>
         <image name="checkmark.seal.fill" catalog="system" width="128" height="128"/>
         <image name="green-chameleon-s9CC2SKySJM-unsplash" width="5184" height="3456"/>

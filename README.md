@@ -11,3 +11,7 @@ Instructions for the App are as follows:
     1. If importing from the Unsplash API, the user will search for photos by keyword, then add them to the collage
 4. User will finalize photo selection and write a personalized note up to 140 characters long and choose a font for the note to be written in
 5. The user will perform one final review of the full card (collage and note). The note will be in a scrollable UITextView in the app. The user can save and share as they please in this view. Cards are exported as PDFs, and all text is displayed to fit the size of a 1 page PDF, rather than scrolling through as would be done in the app.
+
+Swift Languages Version Required: Swift 5
+iOS Version Required: 15.4
+XCode Version Required: 13.3

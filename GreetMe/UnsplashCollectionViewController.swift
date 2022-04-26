@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Network
 //import UnsplashPhotoPicker
 
 
@@ -35,23 +36,38 @@ class UnsplashCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         self.UnsplashCell?.activityIndicator.isHidden = true
         getUnsplashPhotos()
-        print("viewDidLoad Called...")
+        debugPrint("viewDidLoad Called...")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear Called...")
+        debugPrint("viewWillAppear Called...")
+        super.viewWillAppear(true)
     }
     
     func getUnsplashPhotos() {
         self.spinIndicator(true)
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("Connected")
+            } else {
+                self.spinIndicator(true)
+                WriteNoteViewController().sendAlert(title: "Unable to Connect to Internet", message: "Please try again later.")
+                print("Not Connected")
+            }
+            //print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+        
         PhotoAPI.getPhoto(userSearch: searchText, completionHandler: { (response, error) in
             if response != nil {
                 self.picCount = response!.count
                 DispatchQueue.main.async {
                 for picture in response! {
                     if picture.urls.small != nil && picture.user.username != nil && picture.user.name != nil && picture.links.download_location != nil {
-                        print("Picture Object......")
-                        print(picture)
+                        debugPrint("Picture Object......")
+                        debugPrint(picture)
                         let thisPicture = picture.urls.small
                         self.unsplashSmallPhotoURLs.append(thisPicture!)
                         self.unsplashuserNames.append(picture.user.username!)
@@ -62,10 +78,11 @@ class UnsplashCollectionViewController: UICollectionViewController {
                 }
             }
             if self.picCount == 0 {
-                self.sendAlert(title: "No Results for your Search", message: "Please search for something else.")
+                WriteNoteViewController().sendAlert(title: "No Results for your Search", message: "Please search for something else.")
             }
             if response == nil {
-                self.sendAlert(title: "Unable to Connect to Internet", message: "Please try again later.")
+                self.spinIndicator(true)
+                WriteNoteViewController().sendAlert(title: "Unable to Connect to Internet", message: "Please try again later.")
             }
             self.loadUnsplashPhotos()
             self.spinIndicator(false)
@@ -81,7 +98,7 @@ class UnsplashCollectionViewController: UICollectionViewController {
     
     //https://samwize.com/2015/11/30/understanding-uicollection-flow-layout/
     func setLayout() {
-        print("setLayout() called")
+        debugPrint("setLayout() called")
         super.viewDidLayoutSubviews()
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 155, height: 155)
@@ -123,12 +140,12 @@ class UnsplashCollectionViewController: UICollectionViewController {
         // create Get request to notify Unsplash photo was downloaded
         PhotoAPI.pingDownloadURL(downloadLocation: chosenDownloadLocation, completionHandler: { (response, error) in
             if response != nil {
-                print("Ping Success!.......")
-                print(response)
+                debugPrint("Ping Success!.......")
+                debugPrint(response)
             }
             if response == nil {
-                print("Ping Failed!.......")
-                print(response)
+                debugPrint("Ping Failed!.......")
+                debugPrint(response)
             }
         })
         self.performSegue(withIdentifier: "unsplashToImport", sender: nil)
@@ -163,6 +180,10 @@ class UnsplashCollectionViewController: UICollectionViewController {
             }
     }
     
+}
+
+extension UnsplashCollectionViewController {
+    
     func sendAlert(title: String, message: String) {
     // https://stackoverflow.com/questions/24195310/how-to-add-an-action-to-a-uialertview-button-using-swift-ios
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -175,4 +196,5 @@ class UnsplashCollectionViewController: UICollectionViewController {
         alertController.addAction(dismissAction)
         self.present(alertController,animated: true, completion: nil)
     }
+    
 }

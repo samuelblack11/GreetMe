@@ -125,6 +125,22 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
             }
         }
     
+
+    
+    func saveContext() {
+        if DataController.shared.viewContext.hasChanges {
+            do {
+                try DataController.shared.viewContext.save()
+            } catch {
+                print("An error occurred while saving: \(error)")
+            }
+        }
+    }
+    
+}
+
+extension WriteNoteViewController {
+    
     func sendAlert(title: String, message: String) {
     // https://stackoverflow.com/questions/24195310/how-to-add-an-action-to-a-uialertview-button-using-swift-ios
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -135,16 +151,6 @@ class WriteNoteViewController: UIViewController, UITextViewDelegate, UIFontPicke
             
         alertController.addAction(dismissAction)
         self.present(alertController,animated: true, completion: nil)
-    }
-    
-    func saveContext() {
-        if DataController.shared.viewContext.hasChanges {
-            do {
-                try DataController.shared.viewContext.save()
-            } catch {
-                print("An error occurred while saving: \(error)")
-            }
-        }
     }
     
 }

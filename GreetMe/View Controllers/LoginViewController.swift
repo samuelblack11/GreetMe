@@ -10,18 +10,18 @@ import AuthenticationServices
 
 
 class LoginViewController: UIViewController {
-
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var signInButton: UIButton!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+        
     @IBOutlet weak var greetingLogo: UIImageView!
     
+    @IBOutlet weak var stackView: UIStackView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupProviderLoginView()
         activityIndicator.isHidden = true
         print("viewDidLoad")
         // Do any additional setup after loading the view.
-        setUpSignInAppleButton()
         // https://stackoverflow.com/questions/27049937/how-to-set-a-background-image-in-xcode-using-swift
         
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
@@ -29,13 +29,6 @@ class LoginViewController: UIViewController {
         backgroundImage.image = UIImage(named: "hamid-roshaan-BQrzI0vi9x0-unsplash.jpg")
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         self.view.insertSubview(backgroundImage, at: 0)
-        
-    }
-    
-    // When "Sign In with Apple" Button is Tapped, call handleAppleIdRequest()
-    @IBAction func loginFunction(_ sender: Any) {
-        performSegue(withIdentifier: "loginToNav", sender: nil)
-        //handleAppleIdRequest()
     }
     
     func spinActivityIndicator(_ loggingIn: Bool) {
@@ -47,82 +40,105 @@ class LoginViewController: UIViewController {
             activityIndicator.isHidden = true
         }
     }
-    
-    // https://medium.com/@priya_talreja/sign-in-with-apple-using-swift-5cd8695a46b6
-    // Use Authentication Services Framework to give users ability to sign into your services with their Apple ID
-    func setUpSignInAppleButton() {
-      let signInButton = ASAuthorizationAppleIDButton()
-      signInButton.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
-      signInButton.cornerRadius = 10
-    }
-    
-    // Creates request using ASAuthorizationAppleIDProvider and initialize a controller ASAuthorizatioNCntroller to perform request
-    @objc func handleAppleIdRequest() {
-    let appleIDProvider = ASAuthorizationAppleIDProvider()
-    let request = appleIDProvider.createRequest()
-    spinActivityIndicator(true)
 
-    request.requestedScopes = [.fullName, .email]
-    print("requestedScopes")
-    let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-    print("instantiated auth controller")
-    authorizationController.delegate = self
-    print("Delegate called")
-    authorizationController.performRequests()
-    print("performed Requests")
+    
+    // https://developer.apple.com/documentation/sign_in_with_apple/implementing_user_authentication_with_sign_in_with_apple
+    /// - Tag: add_appleid_button
+    func setupProviderLoginView() {
+        let authorizationButton = ASAuthorizationAppleIDButton()
+        authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+        self.stackView.addArrangedSubview(authorizationButton)
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-    if let appleIDCredential = authorization.credential as?  ASAuthorizationAppleIDCredential {
-    let userIdentifier = appleIDCredential.user
-    let fullName = appleIDCredential.fullName
-    let email = appleIDCredential.email
-        print("User id is \(userIdentifier) \n Full Name is \(String(describing: fullName)) \n Email id is \(String(describing: email))")
-    spinActivityIndicator(false)
-        }
-        print("Perform Segue")
-        performSegue(withIdentifier: "loginToNav", sender: self)
-    }
-    
+    // - Tag: perform_appleid_password_request
+    /// Prompts the user if an existing iCloud Keychain credential or Apple ID credential is found.
+    func performExistingAccountSetupFlows() {
+        // Prepare requests for both Apple ID and password providers.
+        let requests = [ASAuthorizationAppleIDProvider().createRequest(),
+                        ASAuthorizationPasswordProvider().createRequest()]
         
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-    // Handle error.
-        debugPrint(error)
+        // Create an authorization controller with the given requests.
+        let authorizationController = ASAuthorizationController(authorizationRequests: requests)
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+        print(".performRequests() called.....")
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // https://medium.com/swift-programming/ios-make-an-awesome-video-background-view-objective-c-swift-318e1d71d0a2
-    // https://github.com/ElvinJin/Video-Background-GIF
-    // Make video background for login page
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    /// - Tag: perform_appleid_request
+    @objc
+    func handleAuthorizationAppleIDButtonPress() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+        print(".performRequests() called.....")
+
+    }
 }
 
-// Create extension of LoginViewController and conform it to specified protocol
 extension LoginViewController: ASAuthorizationControllerDelegate {
+    /// - Tag: did_complete_authorization
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            // Create an account in your system.
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            
+            
+            // For the purpose of this demo app, print the Apple ID credential information
+            
+            print(userIdentifier)
+            print(fullName)
+            print(email)
+        
+        case let passwordCredential as ASPasswordCredential:
+        
+            // Sign in using an existing iCloud Keychain credential.
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+            
+            // For the purpose of this demo app, show the password credential as an alert.
+            DispatchQueue.main.async {
+                self.showPasswordCredentialAlert(username: username, password: password)
+            }
+            
+        default:
+            break
+        }
+    }
     
+    
+    private func showPasswordCredentialAlert(username: String, password: String) {
+        let message = "The app has received your selected credential from the keychain. \n\n Username: \(username)\n Password: \(password)"
+        let alertController = UIAlertController(title: "Keychain Credential Received",
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    /// - Tag: did_complete_error
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+        print("error authorizing......")
+        print(error)
+    }
+}
+
+extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
+    /// - Tag: provide_presentation_anchor
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        print("presentationAnchor called.......")
+        
+        return self.view.window!
+    }
 }
 
