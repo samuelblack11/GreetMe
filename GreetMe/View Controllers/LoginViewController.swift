@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
-        print(".performRequests() called.....")
+        print(".performRequests() in performExistingAccountSetupFlows() called.....")
     }
     
     /// - Tag: perform_appleid_request
@@ -76,7 +76,7 @@ class LoginViewController: UIViewController {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
-        print(".performRequests() called.....")
+        print(".performRequests() in handleAuthorizationAppleIDButtonPress() called.....")
 
     }
 }
